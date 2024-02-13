@@ -1,0 +1,16 @@
+body{
+    background-color: black;
+}
+h1{
+
+    text-align: center;
+    justify-content: center;
+    color: lavender;
+    text-emphasis: bold;
+}
+
+#ProfileBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
