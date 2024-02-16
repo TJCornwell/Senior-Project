@@ -6,26 +6,44 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="../static/css/HomePageStyle.css">
-
+    <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
 </head>
 
+<body>
+    
+    <div class="Top-Section">
+        <!--Can be changed to an image with a link to another page instead of a button
+            Wrap is <a href=="profilePage.html">-->
+        <div class="Left-side">
+            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
+                Home
+            </a>
+            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
+                About
+            </a>
+        </div>
+        
 
-<body>  
-
-    <div>
-        <h1 id="LogoName">Welcome to Easy Budget</h1>
     </div>
 
-    <div class="Actions">
-        <button class="StatementActions" id="NewStatement">New Statement</button>
-        <button class="StatementActions" id="CurrentStatement">View Current Statement</button>
-        <button class="StatementActions" id="PrevStatement">View Previous Statements</button>
+    <div class="Middle">
+        <h1 id="LogoName">Easy Budget</h1>
+    
+        <!--Statement buttons below Program name-->
+        <div class="Actions">
+            <button class="StatementActions" id="NewStatement">New Statement</button>
+            <button class="StatementActions" id="CurrentStatement">View Current Statement</button>
+            <button class="StatementActions" id="PrevStatement">View Previous Statements</button>
+        </div>
     </div>
-
-
-
-    <!--Can be changed to an image with a link to another page instead of a button-->
-    <button id="ProfileBtn">Profile</button>
 </body>
 
+
+<!--JS to open/close Profile Picture window select form-->
+<script>
+    document.getElementById('SelectFormOpen').addEventListener('click', function() {
+            document.getElementById('ProfileSelectFormContainter').classList.toggle('show');
+        });
+
+</script>
 </html>
