@@ -1,0 +1,2 @@
+FLASK_APP=EasyBudget.py
+FLASK_DEBUG=1
