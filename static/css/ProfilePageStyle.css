@@ -44,7 +44,9 @@ body{
     text-decoration: none;
     transform: translateY(-100%);
   }
-  a:hover{
+
+  /*Need to fix the issue with the hover only happening on the border and not the text*/
+  a:hover{ 
     background-color: #568E9D;
     color: black;
     
