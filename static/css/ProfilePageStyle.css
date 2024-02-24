@@ -3,8 +3,8 @@ body{
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    font-family: arial;
-    background: linear-gradient(to top, #568E9D 7.5%, white 100%) ;
+    font-family: Karla;
+    background: linear-gradient(to top,#05411C 7.5%, #fff 100%) ;
 }
 
 @font-face { /*Imports Google font*/
@@ -21,7 +21,7 @@ body{
   position: relative;
   display: flex;
   background-color: #333;
-  color: #568E9D;
+  color:#0c9240;
   justify-content: space-between;
   align-items: center;
   font-size: 25px;
@@ -30,13 +30,13 @@ body{
   p{
     gap: 20px;
     position: absolute;
-    font-family: Product Sans;
+    font-family: Karla;
     font-size: 2.5rem;
     font-weight: 550;
     transform: translateX(-75%) translateY(-140%);
   }
   a{
-    color: #568E9D;
+    color: #0c9240;
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 1.5rem;
@@ -47,7 +47,7 @@ body{
 
   /*Need to fix the issue with the hover only happening on the border and not the text*/
   a:hover{ 
-    background-color: #568E9D;
+    background-color:#0c9240;
     color: black;
     
   }
@@ -185,7 +185,7 @@ body{
   padding: 1.2rem 1.8rem;
   text-align: center;
   text-decoration: none;
-  background: linear-gradient(100deg,#568E9D 35%,  #b0e1ee 100%);
+  background: linear-gradient(to bottom,#0c9240 50%,  #87e9ac 100%);
   border-radius: 2rem;
   box-shadow: 0 4px 6px rgba(50,50,93,0.11), 0 1px 3px rgba(0,0,0,0.08);
   font-size: 1rem;
