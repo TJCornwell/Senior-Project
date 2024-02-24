@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     font-family: Karla;
@@ -30,7 +30,6 @@ body{
   p{
     gap: 20px;
     position: absolute;
-    font-family: Karla;
     font-size: 2.5rem;
     font-weight: 550;
     transform: translateX(-75%) translateY(-140%);
