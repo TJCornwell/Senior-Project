@@ -1,62 +1,29 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width initial-scale=1.0">
-        <title>Home</title>
-        <link rel="stylesheet" href="../static/css/ProfilePageStyle.css">
-        <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
-    </head>
+{%extends "Base.html"%}
+{%block style%}
+<link rel="stylesheet" href="../static/css/ProfilePageStyle.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+{%endblock%}
 
-
-
-    <body>
-        <!------Top Navigation bar for the pages------>
-        <div class="Top-Section">
-            <!------Need to add proper links to the pages------>
-            <div class="Left-side">
-                <a href="HomePage.html">
-                    Home
-                </a>
-                <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
-                    About
-                </a>
-            </div>
-            <div class="Center-side">
-                <p>Easy Budget</p>
-            </div>
-            <div class="Right-side">
-                <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
-                    Profile
-                </a>
-            </div>
-
+{%block content%}
+<!------Profile section------>
+<div class="profile-page">
+    <div class="content">
+    
+        <div class="content__title"> <!--Need to add the User profile name here from db-->
+            <h1>Samantha Jones</h1>
         </div>
-
-
-        <!------Profile section------>
-        <div class="profile-page">
-            <div class="content">
-            
-                <div class="content__title"> <!--Need to add the User profile name here from db-->
-                  <h1>Samantha Jones</h1>
-                </div>
-                
-                <div class="content__description">
-                  <p>User Email</p>
-                  <p>User info?</p>
-                </div>
-                
-                <div class="content__button">
-                    <a class="button" href="#">                        
-                        <p class="button__text">Edit Profile</p>
-                    </a>
-                </div>
-            </div>
-              
+        
+        <div class="content__description">
+            <p>User Email</p>
+            <p>User info?</p>
         </div>
-
-
-    </body>
-
-</html>
+        
+        <div class="content__button">
+            <a class="button" href="#">                        
+                <p class="button__text">Edit Profile</p>
+            </a>
+        </div>
+    </div>
+        
+</div>
+{%endblock%}
