@@ -1,0 +1,133 @@
+body{
+    margin: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: Karla;
+    background: linear-gradient(to top,#05411C 7.5%, #fff 100%) ;
+    height: 100vh;
+}
+
+@font-face { /*Imports Google font*/
+  font-family: 'Product Sans';
+  font-style: normal;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+}
+
+/*------top nav bar------
+  includes: Profile icon, opens selector for "View Account", "Log out"
+*/
+.Top-Section
+{
+  position: relative;
+  display: flex;
+  background-color: #333;
+  color:#0c9240;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  p{
+    gap: 20px;
+    position: absolute;
+    font-size: 2.5rem;
+    font-weight: 550;
+    transform: translateX(-75%) translateY(-140%);
+  }
+  a{
+    color: #0c9240;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-decoration: none;
+    transform: translateY(-100%);
+  }
+
+  a:hover{ 
+    background-color:#0c9240;
+    color: black;
+    
+  }
+  
+}
+
+
+
+/*------Profile Page Styling------*/
+.profile-page {
+  
+  margin-top: 10rem;
+}
+@media (max-width: 990px) {
+  .profile-page {
+    padding-top: 0;
+  }
+}
+.profile-page .content {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07);
+}
+
+
+.profile-page .content__title {
+  margin-top: 4.5rem;
+  text-align: center;
+  order: 1;
+}
+
+.profile-page .content__title h1 {
+  margin-bottom: 0.1rem;
+  font-size: 2.4rem;
+}
+
+
+.profile-page .content__description {
+  margin-top: 2.5rem;
+  text-align: center;
+  order: 2;
+}
+
+.profile-page .content__description p {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+}
+
+
+
+
+.profile-page .content__button {
+  margin: 3rem 0 2rem;
+  text-align: center;
+  order: 4;
+}
+
+.profile-page .content__button .button {
+  display: inline-block;
+  padding: 1.2rem 1.8rem;
+  text-align: center;
+  text-decoration: none;
+  background: linear-gradient(to bottom,#0c9240 60%,  #87e9ac 100%);
+  border-radius: 2rem;
+  box-shadow: 0 4px 6px rgba(50,50,93,0.11), 0 1px 3px rgba(0,0,0,0.08);
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+.button:hover { 
+  box-shadow: rgba(0, 0, 0, .15) 0 5px 15px 5;
+  transform: translateY(-2px);
+} 
+
+
+
