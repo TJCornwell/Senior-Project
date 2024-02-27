@@ -35,6 +35,16 @@
     <!--Expense Tracker section-->
     <div class="container"> 
         <h1>Expense Tracker</h1> 
+        
+        <div class="SearchBar">
+            <form onsubmit="event.preventDefault();" role="search">
+                <input id="search" type="search" placeholder="Search..." autofocus required />
+                <button type="submit">Go</button>    
+            </form>
+        </div>
+
+
+
         <form id="expense-form">
             <input type="text" 
                    id="account-name" 
