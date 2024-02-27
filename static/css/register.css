@@ -1,0 +1,127 @@
+/* CSS reset */
+body, html {
+    background-color: #05411c;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html {
+    font-family: "KarlaRegular";
+    font-style: bold;
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "KarlaRegular";
+    src: url("../static/karla/Karla-Regular");
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 100vh;
+    padding: 2%;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 5%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .wrapper {
+        padding: 8%;
+    }
+}
+
+.register-main {
+    background: #FFF;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+    max-width: 400px;
+    margin-right: 2%;
+    flex: 1;
+}
+
+.register-main__header-1 {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -1.7px;
+    background: linear-gradient(180deg, #2E2E2F 0%, #05411c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    cursor: context-menu;
+    font-family: "KarlaBold";
+}
+
+.register-form {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    row-gap: 2rem;
+    font-size: 16px;
+}
+
+.register-form > div {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.register-form__link {
+    font-size: 14px;
+    color: #636363;
+    text-decoration: none;
+    text-align: right;
+}
+
+.register-form__button {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: linear-gradient(180deg, #2E2E2F 0%, #05411c 100%);
+    border: none;
+    justify-self: right;
+}
+
+.register-form__button:hover {
+    filter: brightness(1.5);
+    cursor: pointer;
+}
+
+.register-form__button-icon {
+    fill: #FFF;
+    align-self: center;
+    justify-self: center;
+    width: 20px;
+    height: 20px;
+}
+
+.register-form__input {
+    border: none;
+    border-bottom: 2px solid #BEBEBE;
+    background: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.register-form__input:valid {
+    border-bottom: 2px solid #05411c;
+}
+
+textarea:focus, .register-form__input:focus {
+    outline: none;
+}
