@@ -38,10 +38,14 @@
         <form id="expense-form">
             <input type="text" 
                    id="account-name" 
-                   placeholder="account Name" required />
+                   placeholder="Account Name" required />
             <input type="text" 
-                   id="income/expense-name" 
-                   placeholder="Income/Expense Name" required /> 
+                   id="Merchant-name" 
+                   placeholder="Merchant Name" required />
+            <select id="Merchant-name" placeholder="Merchant Name" required>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
             <input type="number" 
                    id="expense-amount" 
                    placeholder="Amount" required /> 
@@ -54,7 +58,8 @@
                 <thead> 
                     <tr> 
                         <th>Account Name</th>
-                        <th>Income/Expense Name</th> 
+                        <th>Merchant Name</th>
+                        <th>Income/Expense</th> 
                         <th>Amount</th> 
                         <th>Action</th> 
                     </tr> 
@@ -67,9 +72,6 @@
             </div> 
         </div> 
     </div> 
-
-
-
 
     </div>
 </body>
