@@ -46,16 +46,23 @@
 
 
         <form id="expense-form">
+            <input type="date" 
+                   id="transaction-time" 
+                   required/>
             <input type="text" 
                    id="account-name" 
                    placeholder="Account Name" required />
             <input type="text" 
                    id="Merchant-name" 
                    placeholder="Merchant Name" required />
-            <select id="Merchant-name" placeholder="Merchant Name" required>
+            <select id="Income/Expense" placeholder="Income/Expense" required>
+                <option value=""></option>
                 <option value="Income">Income</option>
                 <option value="Expense">Expense</option>
             </select>
+            <input type="text" 
+                   id="tag-name" 
+                   placeholder="Tag" required />
             <input type="number" 
                    id="expense-amount" 
                    placeholder="Amount" required /> 
@@ -67,9 +74,11 @@
             <table> 
                 <thead> 
                     <tr> 
+                        <th>Date</th>
                         <th>Account Name</th>
                         <th>Merchant Name</th>
                         <th>Income/Expense</th> 
+                        <th>Tag</th> 
                         <th>Amount</th> 
                         <th>Action</th> 
                     </tr> 
