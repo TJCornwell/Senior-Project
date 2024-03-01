@@ -13,7 +13,7 @@ app = Flask(__name__)
 # mysql_password = 'Akinkunmie_94'
 # mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie_94@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -120,7 +120,13 @@ def login():
 def building():
     return render_template('building.html')
 
+@app.route('/index')
+def index():
+    return render_template('HomePage.html')
 
+@app.route('/goals')
+def goal():
+    return render_template('goal.html')
 
 # Run the application on port 5020
 if __name__ == '__main__':

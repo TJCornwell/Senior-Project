@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="../static/css/HomePageStyle.css">
+    <link rel="stylesheet" href="../static/css/goal.css">
     <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
 </head>
 
@@ -34,60 +34,46 @@
 
     <!--Expense Tracker section-->
     <div class="container"> 
-        <h1>Expense Tracker</h1> 
-        
-        <div class="SearchBar">
-            <form onsubmit="event.preventDefault();" role="search">
-                <input id="search" type="search" placeholder="Search..." autofocus required />
-                <button type="submit">Go</button>    
-            </form>
-        </div>
+        <h1>Financial Goals</h1> 
 
 
 
-        <form id="expense-form">
-            <input type="date" 
-                   id="transaction-time" 
-                   required/>
+        <form id="goal-form">
             <input type="text" 
-                   id="account-name" 
-                   placeholder="Account Name" required />
-            <input type="text" 
-                   id="Merchant-name" 
-                   placeholder="Merchant Name" required />
-            <select id="Income/Expense" placeholder="Income/Expense" required>
-                <option value=""></option>
-                <option value="Income">Income</option>
-                <option value="Expense">Expense</option>
-            </select>
-            <input type="text" 
-                   id="tag-name" 
-                   placeholder="Tag" required />
+                   id="goal-name" 
+                   placeholder="Financial Goal Name" required />
             <input type="number" 
-                   id="expense-amount" 
+                   id="goal-amount" 
                    placeholder="Amount" required /> 
             <button type="submit"> 
                 Add
             </button> 
         </form> 
-        <div class="expense-table"> 
+        <div class="goal-table"> 
             <table> 
                 <thead> 
                     <tr> 
-                        <th>Date</th>
-                        <th>Account Name</th>
-                        <th>Merchant Name</th>
-                        <th>Income/Expense</th> 
-                        <th>Tag</th> 
+                        <th>Financial Goal</th>
                         <th>Amount</th> 
+                        <th>Achieved</th>
                         <th>Action</th> 
                     </tr> 
                 </thead> 
-                <tbody id="expense-list"></tbody> 
+                <tbody id="goal-list">
+                    <tr>
+                        <td>New Car</td>
+                        <td>$10,000</td>
+                        <td><input class='achieved-checkbox' type='checkbox' name='achieved' id='achieved1'></td>
+                        <td><button class='edit-btn'>Edit</button> <button class='delete-btn'>Del</button></td>
+                </tbody> 
             </table> 
-            <div class="total-amount"> 
-                <strong>Total:</strong>  
-                $<span id="total-amount">0</span> 
+            <div class="total-achieved"> 
+                <strong>Total Achieved:</strong>  
+                $<span id="amount-achieved">0</span> 
+            </div> 
+            <div class="total-remaining"> 
+                <strong>Total Remaining:</strong>  
+                $<span id="amount-remaining">0</span> 
             </div> 
         </div> 
     </div> 
@@ -95,5 +81,3 @@
     </div>
 </body>
 </html>
-
-
