@@ -53,4 +53,26 @@ body{
     }
     
   }
-  
+
+  article>section{
+    display: flex;
+    flex-direction: row;
+    height:90vh;
+    padding: 5vh;
+  }
+  article{
+    display: flex;
+    flex-direction: column;
+  }
+  .about-image{
+    height: 80vh;
+    max-width: 70%;
+    margin: 5vh 20px;
+  }
+  .about-text{
+    margin:auto;
+    width: 50%;
+    h1{
+      text-align: center;
+    }
+  }
