@@ -13,7 +13,7 @@ app = Flask(__name__)
 # mysql_password = 'Akinkunmie_94'
 # mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie_94@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -50,7 +50,7 @@ class Transactions(db.Model):
     amount = db.Column(db.Float)
     accountid = db.Column(db.Integer, db.ForeignKey('account.accountid'), nullable=False)
 
-
+Account.query.
 # Initialize the database
 with app.app_context():
     db.create_all()
@@ -120,7 +120,17 @@ def login():
 def building():
     return render_template('building.html')
 
+@app.route('/index')
+def index():
+    return render_template('HomePage.html')
 
+@app.route('/summary')
+def summary():
+    #for each user's account, list account, sum of positive transactions, sum of negative, total; since the date indicated
+    #select account, SUM(positive), SUM(negative), total 
+    #from user.account join transaction on user.account=transaction.account
+    
+    return render_template('summary.html')
 
 # Run the application on port 5020
 if __name__ == '__main__':

@@ -1,0 +1,88 @@
+<!DOCTYPE week>
+<week lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/summary.css">
+    <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--Top Navigation bar for the pages-->
+    <div class="Top-Section">
+        <!--Need to add proper links to the pages-->
+        <div class="Left-side">
+            <a class="active" href="{{url_for('index')}}">
+                Home
+            </a>
+            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
+                About
+            </a>
+            <a href="{{url_for('summary')}}">
+                Summary
+            </a>
+        </div>
+        <div class="Center-side">
+            <p>Easy Budget</p>
+        </div>
+        <div div class="Right-side">
+            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
+                Profile
+            </a>
+        </div>
+
+    </div>
+
+    <div id="summary-table-section">
+        <p>Transaction Summary</p>
+        <p>Accounts: 2</p>
+        <!-- can also use a dropdown or date selector -->
+        <p>In the last: </p>
+        <form action="#" method="post">
+            <input type="radio" id="week" name="date_range" value="week">
+            <label for="week">week</label><br>
+            <input type="radio" id="month" name="date_range" value="month">
+            <label for="month">month</label><br>
+            <input type="radio" id="year" name="date_range" value="year">
+            <label for="year">year</label>
+        </form>
+        <div class="summary-table"> 
+            <table> 
+                <thead> 
+                    <tr> 
+                        <th>Account</th>
+                        <th>Income</th>
+                        <th>Expense</th>
+                        <th>Total</th> 
+                    </tr> 
+                </thead> 
+                <tbody id="summary-list">
+                    <tr>
+                        <td>Bank of America</td>
+                        <td>$73</td>
+                        <td>$66</td>
+                        <td>$7</td>
+                    </tr>
+                    <tr>
+                        <td>Comerica</td>
+                        <td>$27</td>
+                        <td>$434</td>
+                        <td>-$407</td>
+                    </tr>
+                    <tr id="total-row">
+                        <td>Total: </td>
+                        <td>$100</td>
+                        <td>$500</td>
+                        <td>-$400</td>
+                    </tr>
+                </tbody> 
+            </table> 
+        </div> 
+
+
+</body>
+
+
+
