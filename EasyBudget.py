@@ -3,7 +3,8 @@ import flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
-from sqlalchemy import func, exc, true
+from sqlalchemy import func, exc, true, case, select
+from sqlalchemy.sql.expression import text
 from datetime import datetime, timedelta
 
 
@@ -50,7 +51,6 @@ class Transactions(db.Model):
     amount = db.Column(db.Float)
     accountid = db.Column(db.Integer, db.ForeignKey('account.accountid'), nullable=False)
 
-Account.query.
 # Initialize the database
 with app.app_context():
     db.create_all()
@@ -61,6 +61,39 @@ def before_request():
     flask.session.permanent =True
     app.permanent_session_lifetime = timedelta(minutes=20) # type: ignore
     flask.session.modified = True
+
+@app.template_filter()
+def currencyFormat(value):
+    value = float(value)
+    if value<0:
+        return "-${:,.2f}".format(abs(value))
+    return "${:,.2f}".format(value)
+
+
+def accountIncomeExpenseQuery(dateInterval:str):
+    user=db.session.get(User, session['userid'])
+
+    return select(Account.accountname, 
+                func.sum(case((Transactions.amount>0, Transactions.amount),else_=0)).label("income"), 
+                func.sum(case((Transactions.amount<0, Transactions.amount),else_=0)).label("expenses"), 
+                func.sum(Transactions.amount).label("total")).\
+            join(Account).\
+            join(User).\
+            where(User.userid == user.userid).\
+            where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}'))).\
+            group_by(Account.accountname)
+
+def accountTotalQuery(dateInterval:str):
+    user=db.session.get(User, session['userid'])
+
+    return select( 
+                func.sum(case((Transactions.amount>0, Transactions.amount),else_=0)).label("income"), 
+                func.sum(case((Transactions.amount<0, Transactions.amount),else_=0)).label("expenses"), 
+                func.sum(Transactions.amount).label("total")).\
+            join(Account).\
+            join(User).\
+            where(User.userid == user.userid).\
+            where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}')))
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -127,10 +160,15 @@ def index():
 @app.route('/summary')
 def summary():
     #for each user's account, list account, sum of positive transactions, sum of negative, total; since the date indicated
-    #select account, SUM(positive), SUM(negative), total 
-    #from user.account join transaction on user.account=transaction.account
-    
-    return render_template('summary.html')
+
+    #SELECT account, SUM(CASE WHEN amount>0 THEN amount ELSE 0 END) as positive, SUM(CASE WHEN amount<0 THEN amount ELSE 0 END) as negative, SUM(amount) 
+    #FROM user JOIN account ON user.userid=account.userid JOIN transactions ON account.accountid=transactions.accountid
+    #WHERE tdate > DATEADD(week/month/year, -1, GETDATE())
+    #GROUP BY amount
+    accountIncomeExpense=db.session.execute(accountIncomeExpenseQuery('year')).all()
+    numAccounts=len(accountIncomeExpense)
+    total=db.session.execute(accountTotalQuery('year')).first()
+    return render_template('summary.html', accountIncomeExpense=accountIncomeExpense, numAccounts=numAccounts, total=total)
 
 # Run the application on port 5020
 if __name__ == '__main__':

@@ -37,7 +37,7 @@
 
     <div id="summary-table-section">
         <p>Transaction Summary</p>
-        <p>Accounts: 2</p>
+        <p>Accounts: {{numAccounts}}</p>
         <!-- can also use a dropdown or date selector -->
         <p>In the last: </p>
         <form action="#" method="post">
@@ -59,23 +59,18 @@
                     </tr> 
                 </thead> 
                 <tbody id="summary-list">
+                    {%for account in accountIncomeExpense%}
                     <tr>
-                        <td>Bank of America</td>
-                        <td>$73</td>
-                        <td>$66</td>
-                        <td>$7</td>
-                    </tr>
-                    <tr>
-                        <td>Comerica</td>
-                        <td>$27</td>
-                        <td>$434</td>
-                        <td>-$407</td>
-                    </tr>
+                        <td>{{account.accountname}}</td>
+                        <td>{{account.income | currencyFormat}}</td>
+                        <td>{{account.expenses | currencyFormat}}</td>
+                        <td>{{account.total | currencyFormat}}</td>
+                    {% endfor %}
                     <tr id="total-row">
                         <td>Total: </td>
-                        <td>$100</td>
-                        <td>$500</td>
-                        <td>-$400</td>
+                        <td>{{total.income | currencyFormat}}</td>
+                        <td>{{total.expenses | currencyFormat}}</td>
+                        <td>{{total.total | currencyFormat}}</td>
                     </tr>
                 </tbody> 
             </table> 
