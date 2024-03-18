@@ -3,7 +3,7 @@ import flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
-from sqlalchemy import func, exc, true
+from sqlalchemy import func, exc, true, case, select
 from datetime import datetime, timedelta
 
 
@@ -13,7 +13,7 @@ app = Flask(__name__)
 # mysql_password = 'Akinkunmie_94'
 # mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie_94@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -61,6 +61,13 @@ def before_request():
     flask.session.permanent =True
     app.permanent_session_lifetime = timedelta(minutes=20) # type: ignore
     flask.session.modified = True
+
+@app.template_filter()
+def currencyFormat(value):
+    value = float(value)
+    if value<0:
+        return "-${:,.2f}".format(abs(value))
+    return "${:,.2f}".format(value)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -120,8 +127,24 @@ def login():
 def building():
     return render_template('building.html')
 
-
+@app.route('/index')
+def index():
+    user=db.session.get(User, session['userid'])
+    transactionData=db.session.execute(
+        select(
+            Transactions.tdate, 
+            Account.accountname, 
+            Transactions.merchant, 
+            (case((Transactions.amount>=0, "Income"),else_="Expense")).label("incomeOrExpense"), 
+            Transactions.tags, 
+            Transactions.amount)\
+        .join(Account)\
+        .join(User)\
+        .where(User.userid == user.userid))
+    total=db.session.scalars(select(func.sum(Transactions.amount)).where(User.userid==user.userid)).first()
+    return render_template('HomePage.html', transactionData=transactionData, total=total)
 
 # Run the application on port 5020
 if __name__ == '__main__':
     app.run(port=5020, debug=True)
+

@@ -83,11 +83,23 @@
                         <th>Action</th> 
                     </tr> 
                 </thead> 
-                <tbody id="expense-list"></tbody> 
+                <tbody id="expense-list">
+                    {%for transaction in transactionData%}
+                    <tr>
+                        <td>{{transaction.tdate}}</td>
+                        <td>{{transaction.accountname}}</td>
+                        <td>{{transaction.merchant}}</td>
+                        <td>{{transaction.incomeOrExpense}}</td>
+                        <td>{{transaction.tags}}</td>
+                        <td>{{transaction.amount | currencyFormat}}</td>
+                        <td><button>Edit</button><button>Delete</button></td>
+                    </tr>
+                    {%endfor%}
+                </tbody> 
             </table> 
             <div class="total-amount"> 
                 <strong>Total:</strong>  
-                $<span id="total-amount">0</span> 
+                <span id="total-amount">{{total | currencyFormat}}</span> 
             </div> 
         </div> 
     </div> 
