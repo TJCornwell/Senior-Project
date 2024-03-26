@@ -57,8 +57,6 @@ body{
   article>section{
     display: flex;
     flex-direction: row;
-    height:90vh;
-    padding: 5vh;
   }
   article{
     display: flex;
@@ -71,8 +69,19 @@ body{
   }
   .about-text{
     margin:auto;
-    width: 50%;
+    max-width: 30%;
     h1{
       text-align: center;
+    }
+  }
+  article h1{
+    font-size:xx-large;
+  }
+  #keeping-it-simple{
+    color:white;
+  }
+  @media (max-width: 768px) {
+    article img{
+      display:none;
     }
   }
