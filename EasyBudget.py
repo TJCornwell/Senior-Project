@@ -76,12 +76,30 @@ def accountIncomeExpenseQuery(dateInterval:str):
     return select(Account.accountname, 
                 func.sum(case((Transactions.amount>0, Transactions.amount),else_=0)).label("income"), 
                 func.sum(case((Transactions.amount<0, Transactions.amount),else_=0)).label("expenses"), 
-                func.sum(Transactions.amount).label("total")).\
-            join(Account).\
-            join(User).\
-            where(User.userid == user.userid).\
-            where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}'))).\
-            group_by(Account.accountname)
+                func.sum(Transactions.amount).label("total"))\
+            .join(Account)\
+            .join(User)\
+            .where(User.userid == user.userid)\
+            .where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}')))\
+            .group_by(Account.accountname)
+    
+
+def topTenExpenseQuery(dateInterval:str):
+    user=db.session.get(User, session['userid'])
+
+    
+    
+    return select(Transactions.tdate, 
+                Account.accountname, 
+                Transactions.merchant, 
+                Transactions.tags, 
+                Transactions.amount)\
+            .join(Account)\
+            .join(User)\
+            .where(User.userid == user.userid)\
+            .where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}')))\
+            .where(Transactions.amount<0)\
+            .order_by(Transactions.amount)
 
 def accountTotalQuery(dateInterval:str):
     user=db.session.get(User, session['userid'])
@@ -165,10 +183,12 @@ def summary():
     #FROM user JOIN account ON user.userid=account.userid JOIN transactions ON account.accountid=transactions.accountid
     #WHERE tdate > DATEADD(week/month/year, -1, GETDATE())
     #GROUP BY amount
-    accountIncomeExpense=db.session.execute(accountIncomeExpenseQuery('year')).all()
+    queryInterval='month'
+    accountIncomeExpense=db.session.execute(accountIncomeExpenseQuery(queryInterval)).all()
+    topTenExpenses=db.session.execute(topTenExpenseQuery(queryInterval)).all()[:10]#is paginate better?
     numAccounts=len(accountIncomeExpense)
-    total=db.session.execute(accountTotalQuery('year')).first()
-    return render_template('summary.html', accountIncomeExpense=accountIncomeExpense, numAccounts=numAccounts, total=total)
+    total=db.session.execute(accountTotalQuery(queryInterval)).first()
+    return render_template('summary.html', topTenExpenses=topTenExpenses, accountIncomeExpense=accountIncomeExpense, numAccounts=numAccounts, total=total)
 
 # Run the application on port 5020
 if __name__ == '__main__':
