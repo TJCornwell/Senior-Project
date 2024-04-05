@@ -64,6 +64,8 @@ def before_request():
 
 @app.template_filter()
 def currencyFormat(value):
+    if value==None:
+        return "$0.00"
     value = float(value)
     if value<0:
         return "-${:,.2f}".format(abs(value))
@@ -187,7 +189,7 @@ def summary():
     accountIncomeExpense=db.session.execute(accountIncomeExpenseQuery(queryInterval)).all()
     topTenExpenses=db.session.execute(topTenExpenseQuery(queryInterval)).all()[:10]#is paginate better?
     numAccounts=len(accountIncomeExpense)
-    total=db.session.execute(accountTotalQuery(queryInterval)).first()
+    total=db.session.execute(accountTotalQuery(queryInterval)).first() or {"income":0,"expenses":0,"total":0}
     return render_template('summary.html', topTenExpenses=topTenExpenses, accountIncomeExpense=accountIncomeExpense, numAccounts=numAccounts, total=total)
 
 # Run the application on port 5020

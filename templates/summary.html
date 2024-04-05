@@ -33,64 +33,75 @@
             </a>
         </div>
     </div>
-
-    <div class="table-wrapper">
-        <div id="summary-table-section">
-            <p>Transaction Summary for the Last Month</p>
-            <p>Accounts: {{numAccounts}}</p>
-            <div class="summary-table"> 
-                <table> 
-                    <thead> 
-                        <tr> 
-                            <th>Account</th>
-                            <th>Income</th>
-                            <th>Expense</th>
-                            <th>Total</th> 
-                        </tr> 
-                    </thead> 
-                    <tbody id="summary-list">
-                        {%for account in accountIncomeExpense%}
-                        <tr>
-                            <td>{{account.accountname}}</td>
-                            <td>{{account.income | currencyFormat}}</td>
-                            <td>{{account.expenses | currencyFormat}}</td>
-                            <td>{{account.total | currencyFormat}}</td>
-                        {% endfor %}
-                        <tr id="total-row">
-                            <td>Total: </td>
-                            <td>{{total.income | currencyFormat}}</td>
-                            <td>{{total.expenses | currencyFormat}}</td>
-                            <td>{{total.total | currencyFormat}}</td>
-                        </tr>
-                    </tbody> 
-                </table> 
-            </div> 
-        </div>
-        <div id="summary-top-10-table-section">
-            <p>Largest Expenses for the Last Month</p>
-            <div class="summary-table">
-                <table> 
-                    <thead> 
-                        <tr> 
-                            <th>Date</th>
-                            <th>Account Name</th>
-                            <th>Merchant Name</th>
-                            <th>Tag</th> 
-                            <th>Amount</th>  
-                        </tr> 
-                    </thead> 
-                    <tbody id="expense-list">
-                        {%for transaction in topTenExpenses%}
-                        <tr>
-                            <td>{{transaction.tdate}}</td>
-                            <td>{{transaction.accountname}}</td>
-                            <td>{{transaction.merchant}}</td>
-                            <td>{{transaction.tags}}</td>
-                            <td>{{transaction.amount | currencyFormat}}</td>
-                        </tr>
-                        {%endfor%}
-                    </tbody> 
-                </table> 
+    <div class="container">
+        <div class="table-wrapper">
+            <div id="summary-table-section">
+                <p>Transaction Summary for the Last Month</p>
+                <p>Accounts: {{numAccounts}}</p>
+                <div class="summary-table"> 
+                    <table> 
+                        <thead> 
+                            <tr> 
+                                <th>Account</th>
+                                <th>Income</th>
+                                <th>Expense</th>
+                                <th>Total</th> 
+                            </tr> 
+                        </thead> 
+                        <tbody id="summary-list">
+                            {%for account in accountIncomeExpense%}
+                            <tr>
+                                <td>{{account.accountname}}</td>
+                                <td>{{account.income | currencyFormat}}</td>
+                                <td>{{account.expenses | currencyFormat}}</td>
+                                <td>{{account.total | currencyFormat}}</td>
+                            </tr>
+                            {% endfor %}
+                            {%if total.total==None or total.total>=0%}
+                            <tr id="total-row" style="background-color: LimeGreen">
+                                <td>Total: </td>
+                                <td>{{total.income | currencyFormat}}</td>
+                                <td>{{total.expenses | currencyFormat}}</td>
+                                <td>{{total.total | currencyFormat}}</td>
+                            </tr>
+                            {%else%}
+                            <tr id="total-row" style="background-color: #ff2929">
+                                <td>Total: </td>
+                                <td>{{total.income | currencyFormat}}</td>
+                                <td>{{total.expenses | currencyFormat}}</td>
+                                <td>{{total.total | currencyFormat}}</td>
+                            </tr>
+                            {%endif%}
+                        </tbody> 
+                    </table> 
+                </div> 
+            </div>
+            <div id="summary-top-10-table-section">
+                <p>Largest Expenses for the Last Month</p>
+                <div class="summary-table">
+                    <table> 
+                        <thead> 
+                            <tr> 
+                                <th>Date</th>
+                                <th>Account Name</th>
+                                <th>Merchant Name</th>
+                                <th>Tag</th> 
+                                <th>Amount</th>  
+                            </tr> 
+                        </thead> 
+                        <tbody id="expense-list">
+                            {%for transaction in topTenExpenses%}
+                            <tr>
+                                <td>{{transaction.tdate}}</td>
+                                <td>{{transaction.accountname}}</td>
+                                <td>{{transaction.merchant}}</td>
+                                <td>{{transaction.tags}}</td>
+                                <td>{{transaction.amount | currencyFormat}}</td>
+                            </tr>
+                            {%endfor%}
+                        </tbody> 
+                    </table> 
+                </div>
             </div>
         </div>
     </div>
