@@ -13,7 +13,7 @@ app = Flask(__name__)
 # mysql_password = 'Akinkunmie_94'
 # mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie_94@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -25,7 +25,9 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     registration_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
+    birthdate = db.Column(db.Integer)
+    name = db.Column(db.String(255))
+    gender = db.Column(db.String(255))
 
     # Define a relationship to the Account table
     accounts = relationship('Account', backref='user', lazy=True)
@@ -105,7 +107,7 @@ def login():
             session['userid'] = user.userid
             uid = session['userid']
 
-            return redirect(url_for('building'))
+            return redirect(url_for('profile'))
         
         # Invalid credentials, redirect back to the login page
         else:
@@ -120,7 +122,19 @@ def login():
 def building():
     return render_template('building.html')
 
+#Route for Profile Page
+@app.route("/profile")
+def profile():
+    user = User.query.all()
+    if 'userid' in session:
+            uid = session['userid']
+    return render_template('ProfilePage.html', user=user)
 
+
+#Route for Home Page
+@app.route("/home")
+def home():
+    return render_template('HomePage.html')
 
 # Run the application on port 5020
 if __name__ == '__main__':

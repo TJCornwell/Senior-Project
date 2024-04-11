@@ -33,7 +33,7 @@ body{
     position: absolute;
     font-size: 2.5rem;
     font-weight: 550;
-    transform: translateX(-75%) translateY(-140%);
+    transform: translateX(-105%) translateY(-140%);
   }
   a{
     color: #0c9240;
@@ -79,9 +79,7 @@ body{
   box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07);
 }
 
-
 .profile-page .content__title {
-  margin-top: 4.5rem;
   text-align: center;
   order: 1;
 }
@@ -91,42 +89,14 @@ body{
   font-size: 2.4rem;
 }
 
-
-.profile-page .content__description {
-  margin-top: 2.5rem;
-  text-align: center;
-  order: 2;
+/*--- Edit info button---*/
+.profile-page .content__title #edit-profile
+{
+  size: 4px;
 }
-
-.profile-page .content__description p {
-  margin-bottom: 0.2rem;
-  font-size: 1.2rem;
-}
-
-
-
-
-.profile-page .content__button {
-  margin: 3rem 0 2rem;
-  text-align: center;
-  order: 4;
-}
-
-.profile-page .content__button .button {
-  display: inline-block;
-  padding: 1.2rem 1.8rem;
-  text-align: center;
-  text-decoration: none;
-  background: linear-gradient(to bottom,#0c9240 60%,  #87e9ac 100%);
-  border-radius: 2rem;
-  box-shadow: 0 4px 6px rgba(50,50,93,0.11), 0 1px 3px rgba(0,0,0,0.08);
-  font-size: 1rem;
-  color: #fff;
+.profile-page .content__title #edit-profile:hover 
+{ 
   cursor: pointer;
-}
-.button:hover { 
-  box-shadow: rgba(0, 0, 0, .15) 0 5px 15px 5;
-  transform: translateY(-2px);
 } 
 
 
