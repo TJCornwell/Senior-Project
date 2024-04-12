@@ -36,35 +36,53 @@
 
         </div>
 
-
-        <!------Profile section------>
+            <!------Profile section------>
         <div class="profile-page">
             <div class="content">            
-                <div class="content__title"> <!--Need to add the User profile name here from db-->
-                  <h1>Profile</h1>
-                  <btn id="edit-profile">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                  </btn>
+                <div class="content__title">
+                    <h1>Profile</h1>
+                    
                 </div>
                 
-                <div class="UserInfo">
-                    <table>
-                        <tr>
-                            <td>{{user.email}}</td>
-                            <td>{{user.name}}</td>
-                            <td>{{user.name}}</td>
-                            <td>{{user.name}}</td>
-                        </tr>
+                <div class="UserInfo"> <!--cannot get it to display???-->
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Sex</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.age }}</td>
+                                <td>{{ user.sex }}</td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                
+                        </tbody>
                     </table>
                 </div>
 
                 
-                
             </div>
-              
+            
         </div>
-
-
     </body>
+
+
+
+
+
+    
+<!--     edit profile icon
+    <btn id="edit-profile">
+        <i class="fa-regular fa-pen-to-square"></i>
+    </btn> -->
 
 </html>

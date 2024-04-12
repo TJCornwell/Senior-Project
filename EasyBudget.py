@@ -122,12 +122,13 @@ def login():
 def building():
     return render_template('building.html')
 
-#Route for Profile Page
+#Route f    or Profile Page
 @app.route("/profile")
 def profile():
-    user = User.query.all()
     if 'userid' in session:
-            uid = session['userid']
+        uid = session['userid']
+        user = User.query.all()
+            
     return render_template('ProfilePage.html', user=user)
 
 
