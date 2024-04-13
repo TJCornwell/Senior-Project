@@ -127,7 +127,7 @@ def building():
 def profile():
     if 'userid' in session:
         uid = session['userid']
-        user = User.query.all()
+        user = User.query.first()
             
     return render_template('ProfilePage.html', user=user)
 

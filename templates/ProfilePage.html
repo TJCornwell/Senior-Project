@@ -44,45 +44,42 @@
                     
                 </div>
                 
-                <div class="UserInfo"> <!--cannot get it to display???-->
-                    <table >
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Sex</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                
-                            <tr>
-                                <td>{{ user.id }}</td>
-                                <td>{{ user.name }}</td>
-                                <td>{{ user.age }}</td>
-                                <td>{{ user.sex }}</td>
-                                <td>{{ user.email }}</td>
-                            </tr>
-                
-                        </tbody>
-                    </table>
+                <div class="card">
+                    <div class="card-body">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="row-header">Name</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header">Email</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header">Birthday</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.birthdate}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header">Gender</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.gender}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                      
                 </div>
-
+                <div>                
+                    <i class="fa fa-pen fa-xs edit"></i>
+                </div>
+                
+            
                 
             </div>
-            
         </div>
     </body>
-
-
-
-
-
-    
-<!--     edit profile icon
-    <btn id="edit-profile">
-        <i class="fa-regular fa-pen-to-square"></i>
-    </btn> -->
-
 </html>
