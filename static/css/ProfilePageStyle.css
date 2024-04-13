@@ -97,12 +97,9 @@ body{
   font-weight: bold;  
   padding-left: 7rem;
 }
-.profile-page .content .card .card-body .row-data
-{
-  
-}
 .profile-page .content .edit
 {
+  color: rgba(128, 128, 128, 0.581);
   position: absolute;
   font-size: 1rem;
   bottom: 0;
