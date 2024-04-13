@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width initial-scale=1.0">
-        <title>Home</title>
+        <title>Profile</title>
         <link rel="stylesheet" href="../static/css/ProfilePageStyle.css">
         <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
@@ -15,48 +15,71 @@
         <div class="Top-Section">
             <!------Need to add proper links to the pages------>
             <div class="Left-side">
-                <a href="HomePage.html">
+                <a href="/home">
                     Home
                 </a>
-                <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
+                <a href="/about">
                     About
+                </a>
+                <a href="/summary">
+                    Summary
                 </a>
             </div>
             <div class="Center-side">
                 <p>Easy Budget</p>
             </div>
             <div class="Right-side">
-                <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.christianacare.org%2F2023%2F05%2Fthe-scoop-on-poop%2F&psig=AOvVaw2OkThjwIYaJKfYnQcTzmQH&ust=1707977043473000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJCV7biUqoQDFQAAAAAdAAAAABAE">
+                <a href="/profile">
                     Profile
                 </a>
             </div>
 
         </div>
 
-
-        <!------Profile section------>
+            <!------Profile section------>
         <div class="profile-page">
-            <div class="content">
+            <div class="content">            
+                <div class="content__title">
+                    <h1>Profile</h1>
+                    
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="row-header">Name</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header">Email</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header">Birthday</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.birthdate}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header">Gender</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.gender}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                      
+                </div>
+                <div>                
+                    <i class="fa fa-pen fa-xs edit"></i>
+                </div>
+                
             
-                <div class="content__title"> <!--Need to add the User profile name here from db-->
-                  <h1>Samantha Jones</h1>
-                </div>
                 
-                <div class="content__description">
-                  <p>User Email</p>
-                  <p>User info?</p>
-                </div>
-                
-                <div class="content__button">
-                    <a class="button" href="#">                        
-                        <p class="button__text">Edit Profile</p>
-                    </a>
-                </div>
             </div>
-              
         </div>
-
-
     </body>
-
 </html>
