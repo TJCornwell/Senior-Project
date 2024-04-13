@@ -13,7 +13,13 @@ app = Flask(__name__)
 # mysql_password = 'Akinkunmie_94'
 # mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
+
+#Tim
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+
+#Cody
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -83,7 +89,7 @@ def register():
                 return redirect(url_for('login'))
             except exc.IntegrityError as e:
                 db.session.rollback()
-                flash('<p style="color: red;">Email has already been registered. Please user another email address</p>')
+                flash('<p style="color: red;">Email has already been registered. Please use another email address</p>')
                 return redirect(url_for('register'))
         else:
             pass_no_match = 'Passwords do not match. Please try again.'
@@ -136,6 +142,11 @@ def profile():
 @app.route("/home")
 def home():
     return render_template('HomePage.html')
+
+@app.route('/about')
+def about():
+    return render_template('About.html')
+
 
 # Run the application on port 5020
 if __name__ == '__main__':
