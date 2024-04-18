@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width initial-scale=1.0">
         <title>EditProfile</title>
-        <link rel="stylesheet" href="../static/css/ProfilePageStyle.css">
+        <link rel="stylesheet" href="../static/css/EditProfile.css">
         <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
     </head>
@@ -14,43 +14,62 @@
             <!------Profile section------>
         <div class="profile-page">
             <div class="content">            
-                <div class="content__title">
+                <div class="content-title">
                     <h1>Edit Profile</h1>
                     
                 </div>
                 
-                <div class="card">
-                    <div class="card-body">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="row-header">Name</td>
-                                    <td>:</td>
-                                    <td class="row-data">{{user.name}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="row-header">Email</td>
-                                    <td>:</td>
-                                    <td class="row-data">{{user.email}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="row-header">Birthday</td>
-                                    <td>:</td>
-                                    <td class="row-data">{{user.birthdate}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="row-header">Gender</td>
-                                    <td>:</td>
-                                    <td class="row-data">{{user.gender}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                      
+                <div class="edit-main">
+                    <form class="edit-form" action="#" method="post">
+                        <div class="edit-form__name">
+                            <label class="edit-form__label" for="name">Name</label>
+                            <input
+                                title=""
+                                placeholder={{user.name}}
+                                class="edit-form__input"
+                                type="name"
+                                name="name"
+                            />
+                        </div>
+                        <div class="edit-form__email">
+                            <label class="edit-form__label" for="email">Email</label>
+                            <input
+                                title=""
+                                placeholder={{user.email}}
+                                class="edit-form__input"
+                                type="email"
+                                name="email"
+                                required/>
+                        </div>
+                        <div class="edit-form__birthday">
+                            <label class="edit-form__label" for="password">Birthday </label>
+                            <input
+                                title=""
+                                placeholder=mmddyyyy
+                                class="edit-form__input"
+                                type="birthday"
+                                name="birthday"
+                                pattern="\d{1,2}\d{1,2}\d{4}"
+                                >
+                        </div>
+                        <div class="edit-form__gender">
+                            <label class="edit-form__label" for="gender">Gender</label>
+                            <input
+                                title=""
+                                placeholder={{user.gender}}
+                                class="edit-form__input"
+                                type="gender"
+                                name="gender"
+                                >
+                        </div>
+                    </form>
                 </div>
-                <div>                
-                    <i class="fa fa-pen fa-xs edit"></i>
+
+                <div class="buttons">
+                   <a href="/profile"> <button class="cancel" >cancel</button> </a>
+                    <button class="save" >save</button>
                 </div>
+                
                 
             
                 
