@@ -1,0 +1,72 @@
+body{
+    margin: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: Karla;
+    background: linear-gradient(to top,#05411C 7.5%, #fff 100%) ;
+    height: 100vh;
+}
+
+/*------Profile Page Styling------*/
+.profile-page {
+  
+  margin-top: 10rem;
+}
+@media (max-width: 990px) {
+  .profile-page {
+    padding-top: 0;
+  }
+}
+.profile-page .content {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  padding-bottom: 2rem;
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07);
+}
+
+/*----Profile Content----*/
+.profile-page .content .content__title{
+  align-self: center;
+  transform: translateX(-10%)
+}
+.profile-page .content .card {
+  align-self: center; 
+  margin: auto;
+}
+.profile-page .content .card table {
+  border: none;
+  font-size: 1.5rem;
+
+}
+.profile-page .content .card table td
+{
+  padding-top: 10px;
+}
+.profile-page .content .card .card-body .row-header{
+  font-weight: bold;  
+  padding-left: 7rem;
+}
+.profile-page .content .edit
+{
+  color: rgba(128, 128, 128, 0.581);
+  position: absolute;
+  font-size: 1rem;
+  bottom: 0;
+  right: 0;
+  padding: 20px; /* Adjust as needed */
+}
+.profile-page .content .edit:hover
+{
+  cursor: pointer;
+}
+
+
+

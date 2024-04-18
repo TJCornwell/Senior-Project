@@ -147,6 +147,15 @@ def home():
 def about():
     return render_template('About.html')
 
+@app.route('/edit-profile')
+def editProfile():
+    if 'userid' in session:
+        uid = session['userid']
+        user = User.query.first()
+
+        
+
+    return render_template('EditProfile.html', user=user)
 
 # Run the application on port 5020
 if __name__ == '__main__':
