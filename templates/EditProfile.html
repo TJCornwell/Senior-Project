@@ -27,7 +27,7 @@
                                 title=""
                                 placeholder={{user.name}}
                                 class="edit-form__input"
-                                type="name"
+                                type="text"
                                 name="name"
                             />
                         </div>
@@ -44,10 +44,11 @@
                         <div class="edit-form__birthday">
                             <label class="edit-form__label" for="password">Birthday </label>
                             <input
+                                class="birthday-input"
                                 title=""
                                 placeholder=mmddyyyy
                                 class="edit-form__input"
-                                type="birthday"
+                                type="text"
                                 name="birthday"
                                 pattern="\d{1,2}\d{1,2}\d{4}"
                                 >
@@ -55,10 +56,11 @@
                         <div class="edit-form__gender">
                             <label class="edit-form__label" for="gender">Gender</label>
                             <input
+                                class="gender-input"
                                 title=""
                                 placeholder={{user.gender}}
                                 class="edit-form__input"
-                                type="gender"
+                                type="text"
                                 name="gender"
                                 >
                         </div>
@@ -67,7 +69,7 @@
 
                 <div class="buttons">
                    <a href="/profile"> <button class="cancel" >cancel</button> </a>
-                    <button class="save" >save</button>
+                    <button type="submit" class="save" value="Submit" >save</button>
                 </div>
                 
                 

@@ -40,7 +40,18 @@ body{
 {
     font-size: 1.5rem;
 }
-
+.profile-page .content .edit-main label
+{
+  padding-right: 35px
+}
+.profile-page .content .edit-main .birthday-input
+{
+  transform: translateX(-15%);
+}
+.profile-page .content .edit-main .gender-input
+{
+  transform: translateX(-7.5%);
+}
 
 
 /*--- Save Button ----*/
