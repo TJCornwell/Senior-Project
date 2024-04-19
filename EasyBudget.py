@@ -3,7 +3,7 @@ import flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
-from sqlalchemy import func, exc, true
+from sqlalchemy import func, exc, true, CheckConstraint
 from datetime import datetime, timedelta
 
 
@@ -31,9 +31,9 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     registration_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    birthdate = db.Column(db.Integer)
+    birthdate = db.Column(db.DateTime)
     name = db.Column(db.String(255))
-    gender = db.Column(db.String(255))
+    gender = db.Column(db.String(6), CheckConstraint('gender="Male" or gender="Female"'))
 
     # Define a relationship to the Account table
     accounts = relationship('Account', backref='user', lazy=True)
@@ -164,7 +164,7 @@ def editProfile():
                 user.gender=gender if gender else user.gender
                 db.session.commit()
                 flash('Profile edited successfully!',"success")
-                return redirect(url_for('home'))
+                return redirect(url_for('profile'))
             except exc.IntegrityError as e:
                 db.session.rollback()
                 flash('<p style="color: red;">Email has already been registered. Please use another email address</p>')

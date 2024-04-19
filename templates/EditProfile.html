@@ -12,6 +12,15 @@
 
     <body>
             <!------Profile section------>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message | safe }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         <div class="profile-page">
             <div class="content">            
                 <div class="content-title">
@@ -39,7 +48,7 @@
                                 class="edit-form__input"
                                 type="email"
                                 name="email"
-                                required/>
+                            />
                         </div>
                         <div class="edit-form__birthday">
                             <label class="edit-form__label" for="birthday">Birthday </label>
@@ -48,21 +57,23 @@
                                 title=""
                                 placeholder=mmddyyyy
                                 class="edit-form__input"
-                                type="text"
+                                type="date"
                                 name="birthday"
-                                pattern="\d{1,2}\d{1,2}\d{4}"
-                                >
+                                value={{user.birthdate}}
+                            >
                         </div>
                         <div class="edit-form__gender">
                             <label class="edit-form__label" for="gender">Gender</label>
-                            <input
-                                class="gender-input"
-                                title=""
-                                placeholder={{user.gender}}
-                                class="edit-form__input"
-                                type="text"
-                                name="gender"
-                                >
+                            <select class="gender-input"
+                            title=""
+                            placeholder={{user.gender}}
+                            class="edit-form__input"
+                            type="text"
+                            name="gender"> 
+                                <option></option>
+                                <option value="Male">Male</option> 
+                                <option value="Female">Female</option> 
+                            </select>
                         </div>
                         <div class="buttons">
                             <a href="/profile"> <button class="cancel" >cancel</button> </a>
