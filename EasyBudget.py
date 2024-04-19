@@ -15,10 +15,10 @@ app = Flask(__name__)
 # mysqlDB = 'easybudget'
 
 #Tim
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 
 #Cody
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
@@ -147,11 +147,28 @@ def home():
 def about():
     return render_template('About.html')
 
-@app.route('/edit-profile')
+@app.route('/edit-profile', methods=['GET','POST'])
 def editProfile():
     if 'userid' in session:
         uid = session['userid']
-        user = User.query.first()
+        user = User.query.filter_by(userid=uid).first()
+        if request.method=='POST':
+            name=request.form['name']
+            email=request.form['email']
+            birthdate=request.form['birthday']
+            gender=request.form['gender']
+            try:
+                user.name=name if name else user.name
+                user.email=email if email else user.email
+                user.birthdate=birthdate if birthdate else user.birthdate
+                user.gender=gender if gender else user.gender
+                db.session.commit()
+                flash('Profile edited successfully!',"success")
+                return redirect(url_for('home'))
+            except exc.IntegrityError as e:
+                db.session.rollback()
+                flash('<p style="color: red;">Email has already been registered. Please use another email address</p>')
+                return redirect(url_for('editProfile'))
 
         
 
