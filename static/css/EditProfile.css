@@ -20,7 +20,8 @@ body{
   display: flex;
   flex-direction: column;
   max-width: 800px;
-  width: 100%;
+  width: 25%;
+  height: 300px;
   position: relative;
   z-index: 2;
   margin: auto;
@@ -38,10 +39,11 @@ body{
 
 .profile-page .content .edit-main
 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 .profile-page .content .edit-main label
 {
+  padding-bottom: 20px;
   padding-right: 35px
 }
 .profile-page .content .edit-main .birthday-input
@@ -52,12 +54,20 @@ body{
 {
   transform: translateX(-7.5%);
 }
-
+.profile-page .content .edit-main .edit-form__email
+{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.profile-page .content .edit-main .edit-form__gender
+{
+  padding-top: 10px;
+}
 
 /*--- Save Button ----*/
 .profile-page .content .buttons{
     bottom: 0;
-    transform: translateY(75%);
+    transform: translateY(125%);
     
 }
 .profile-page .content .save{
