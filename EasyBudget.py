@@ -89,7 +89,7 @@ def register():
                 return redirect(url_for('login'))
             except exc.IntegrityError as e:
                 db.session.rollback()
-                flash('<p style="color: red;">Email has already been registered. Please use another email address</p>')
+                flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
                 return redirect(url_for('register'))
         else:
             pass_no_match = 'Passwords do not match. Please try again.'
@@ -167,7 +167,7 @@ def editProfile():
                 return redirect(url_for('profile'))
             except exc.IntegrityError as e:
                 db.session.rollback()
-                flash('<p style="color: red;">Email has already been registered. Please use another email address</p>')
+                flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
                 return redirect(url_for('editProfile'))
 
         

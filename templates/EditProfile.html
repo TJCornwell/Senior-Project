@@ -12,20 +12,10 @@
 
     <body>
             <!------Profile section------>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class="flashes">
-                    {% for message in messages %}
-                        <li>{{ message | safe }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
         <div class="profile-page">
             <div class="content">            
                 <div class="content-title">
                     <h1>Edit Profile</h1>
-                    
                 </div>
                 
                 <div class="edit-main">
@@ -75,12 +65,22 @@
                                 <option value="Female">Female</option> 
                             </select>
                         </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class="flashes">
+                                    {% for message in messages %}
+                                        <li>{{ message | safe }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
                         <div class="buttons">
-                            <a href="/profile"> <button class="cancel" >cancel</button> </a>
+                            <a  class="cancel" href="/profile">
+                                Cancel
+                            </a>
                              <button type="submit" class="save" value="Submit" >
-                                save
+                                Save
                             </button>
-                             
                          </div>
                     </form>
                 </div>
