@@ -1,102 +1,196 @@
 <!DOCTYPE html>
-<html lang="eng">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="../static/css/HomePageStyle.css">
-    <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management</title>
+    <link rel="stylesheet" href="../static/css/transact.css">
 </head>
-
 <body>
-    <!--Top Navigation bar for the pages-->
-    <div class="Top-Section">
-        <!--Need to add proper links to the pages-->
-        <div class="Left-side">
-            <a class="active" href="/home">
+    <div class="top-section">
+        <div class="summary">
+            <a href="{{url_for('transact')}}">
                 Home
             </a>
-            <a href="/home">
+        </div>
+        <div class="summary" >
+            <a href="{{url_for('about')}}">
                 About
             </a>
-            <a href="/summary">
+        </div>
+        <div class="summary" >
+            <a href="">
                 Summary
             </a>
         </div>
-        <div class="Center-side">
+        <div class="center-side">
             <p>Easy Budget</p>
         </div>
-        <div div class="Right-side">
-            <a href="/profile">
-                Profile
-            </a>
-        </div>
-
-    </div>
-
-    <!--Expense Tracker section-->
-    <div class="container"> 
-        <h1>Expense Tracker</h1> 
         
-        <div class="SearchBar">
-            <form onsubmit="event.preventDefault();" role="search">
-                <input id="search" type="search" placeholder="Search..." autofocus required />
-                <button type="submit">Go</button>    
+        <div class="application-header__user-profile-wrapper">
+            <svg
+                class="application-header__user-profile-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+            </svg>
+            <button class="application-header__user-profile-button">
+                {{email}}
+            </button>
+            <svg
+                class="application-header__user-profile-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path d="M7,10L12,15L17,10H7Z" />
+            </svg>
+            <!-- dropdown menu -->
+            <div class="application-header__user-profile__dropdown-menu">
+                <div class="dropdown-menu-content">
+                    <div class="dropdown-menu-item">
+                        <div class="dropdown-menu-item__icon-item-wrapper">
+                            <svg
+                                class="dropdown-menu-item-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                            >
+                            <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                            </svg>
+                            <a
+                            class="dropdown-menu-item__link"
+                            href="{{url_for('profile')}}">
+                            Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="application-wrapper">
+        <div class="left-sidebar">
+            
+            <h2>Account Management</h2>
+            <div class="results-filter__accounts-add">
+                <button class="results-filter__icon-button" href="{{ url_for('addaccount') }}" onclick="addaccount()">
+                    <svg
+                    class="results-filter__icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" />
+                    </svg>
+                    <script src="../static/js/addaccount.js"></script>
+                </button>
+                <div>
+                    Add account
+                </div>
+            </div>
+            <div class="results-filter__accounts-remove">
+                <button class="results-filter__icon-button">
+                    <svg
+                        class="results-filter__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path d="M20 14H4V10H20" />
+                    </svg>
+                </button>
+                <div>
+                    Remove account
+                </div>
+            </div>
+            <form action="{{ url_for('transact') }}"  method="POST">
+            <h3>Accounts</h3>
+            <ul id="accountList" class="account-list">
+                {% for acct in acct_check %}
+                <li for="checkbox" class="account-filter-label" id="checkboxResult">
+                    <input 
+                        type="checkbox"
+                        name="checkbox"
+                        class="account-filter-checkbox"
+                        value="{{acct[0]}}">
+
+                        {{acct[0]}}
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <script src="/static/js/dateValidation.js" defer></script>
+            
+                <div class="date-filter">
+                    <div>
+                        <label for="fromDate">From:</label>
+                        <input type="date" id="fromDate" name="fromDate">
+                    </div>
+                    <div>
+                        <label for="toDate">To:</label>
+                        <input type="date" id="toDate" name="toDate">
+                    </div>
+                    <button type="submit">Filter</button>
+                </div>
             </form>
         </div>
+        <div class="right-content">
+            <label class="total-spend-label">Total Spent:</label>
+            <span id="totalSpend">{{ spends }}</span>
 
-
-
-        <form id="expense-form">
-            <input type="date" 
-                   id="transaction-time" 
-                   required/>
-            <input type="text" 
-                   id="account-name" 
-                   placeholder="Account Name" required />
-            <input type="text" 
-                   id="Merchant-name" 
-                   placeholder="Merchant Name" required />
-            <select id="Income/Expense" placeholder="Income/Expense" required>
-                <option value=""></option>
-                <option value="Income">Income</option>
-                <option value="Expense">Expense</option>
-            </select>
-            <input type="text" 
-                   id="tag-name" 
-                   placeholder="Tag" required />
-            <input type="number" 
-                   id="expense-amount" 
-                   placeholder="Amount" required /> 
-            <button type="submit"> 
-                Add
-            </button> 
-        </form> 
-        <div class="expense-table"> 
-            <table> 
-                <thead> 
-                    <tr> 
+            <table>
+                <thead>
+                    <tr>
+                        
+                        <th>TNum</th>
+                        <th>Merchant</th>
                         <th>Date</th>
-                        <th>Account Name</th>
-                        <th>Merchant Name</th>
-                        <th>Income/Expense</th> 
-                        <th>Tag</th> 
-                        <th>Amount</th> 
-                        <th>Action</th> 
-                    </tr> 
-                </thead> 
-                <tbody id="expense-list"></tbody> 
-            </table> 
-            <div class="total-amount"> 
-                <strong>Total:</strong>  
-                $<span id="total-amount">0</span> 
-            </div> 
-        </div> 
-    </div> 
+                        <th>Account</th>
+                        <th>Tags</th>
+                        <th>Amount</th>
+                        <!--<th>All <input type="checkbox" id="selectAllCheckbox" onclick="toggleAllCheckboxes()"></th>-->
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody" class="application-body__table-rows" onclick="myFunction(event)">
+                    <!-- Sample Data for tbody -->
+                    {% for row in data %}
+                    <tr class="table-row">
+                        <td><a href="{{url_for('editTransaction', transaction_id=row[0] )}}" >{{ row[0] }}</a></td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <!-- <td> <!-- New cell for delete checkbox -
+                            <input type="checkbox" class="deleteCheckbox" name="deleteTransaction" value="{{ row[0] }}">
+                        </td>-->
 
+                        
+                    </tr>
+                    <!-- Add more rows as needed -->
+                    {% endfor %}
+                    <script src="/static/js/editTransaction.js"></script>
+                
+                </tbody>
+            </table>
+            <!--<button type="submit" form="deleteTransactionsForm" name="action" value="delete">Delete Selected Transactions</button>
+            <form id="deleteTransactionsForm" action="{{ url_for('transact') }}" method="POST">
+                <input type="hidden" name="deleteAll" value="false">
+            </form>-->
+        </div>
+        
     </div>
+    <footer class="application-footer">
+        <button href="{{ url_for('newTransaction') }}" onclick="newTransaction()">Create Transaction</button>
+        <script src="/static/js/newTransaction.js"></script>  
+    </footer>
+    <!--<script>
+        function toggleAllCheckboxes() {
+            var checkboxes = document.querySelectorAll('.deleteCheckbox');
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+    </script>-->
+    
+
+    
+
 </body>
-
-
-
+</html>

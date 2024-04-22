@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Account</title>
+</head>
+<body>
+
+<h2>Add New Account</h2>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message | safe }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<form action="{{ url_for('addaccount') }}" method="post">
+    <!-- Transaction Tag -->
+    <label for="addaccount">Account Name: </label>
+    <input type="text" id="addaccount" name="addaccount" required><br>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Submit">
+    
+    <!-- Reset Button -->
+    <input type="reset" value="Reset">
+    
+</form>
+{% if new_acct_error %}
+        <p style="color: red;">{{ new_acct_error }}</p>
+{% endif %}
+
+</body>
+</html>

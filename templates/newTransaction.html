@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/newTransaction.css">
+    <title>New Transaction</title>
+</head>
+<body>
+    <main>
+        <section class="wrapper">
+            <form class="edit-form" action="{{ url_for('newTransaction') }}"  method="post">
+                <h1 class="edit-form__header-1">Transaction Details</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                            {% for message in messages %}
+                                <li>{{ message | safe }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <!-- Transaction Tag -->
+                <div>
+                    <label class="edit-form__label" for="transactionTag">Transaction Tag:</label>
+                    <input class="edit-form__input" type="text" id="transactionTag" name="transactionTag" required>
+                </div>
+
+                <!-- Transaction Date -->
+                <div>
+                    <label class="edit-form__label" for="transactionDate">Transaction Date:</label>
+                    <input class="edit-form__input" type="date" id="transactionDate" name="transactionDate" required>
+                </div>
+
+                <!-- Account Selection -->
+                <div>
+                    <label class="edit-form__label" for="accounts">Account:</label>
+                    <select name="accounts" id="accounts">
+                        {% for accounts in account_names %}
+                        <option value="{{accounts}}" name="accounts">{{accounts}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Merchant Name -->
+                <div>
+                    <label class="edit-form__label" for="merchant">Merchant:</label>
+                    <input class="edit-form__input" type="text" id="merchant" name="merchant" required><br>
+                </div>
+
+                <!-- Transaction Amount -->
+                <div>
+                    <label class="edit-form__label" for="amount">Amount:</label>
+                    <input class="edit-form__input" type="number" id="amount" name="amount" step="0.01" min="1" required><br>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="edit-form__button-menu">
+                    <input class="edit-form__primary-button" type="submit" value="Submit" name="submit_button">
+                
+                <!-- Reset Button -->
+                    <input class="edit-form__secondary-button" type="reset" value="Reset">
+                </div>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
