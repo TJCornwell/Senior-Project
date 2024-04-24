@@ -1,5 +1,5 @@
-<!DOCTYPE week>
-<week lang="eng">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="../static/css/summary.css">
     <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
@@ -104,9 +105,51 @@
                 </div>
             </div>
         </div>
+    <div id="tag-graph"></div>
     </div>
+    <script type="text/javascript">
+        var tagExpenses=[];
+        var tags=new Set();
+        {%for transaction in tagExpenses%}
+            tagExpenses.push(["{{transaction[0]}}", Math.abs({{transaction[1]}})]);
+            tags.add("{{transaction[0]}}");
+        {%endfor%}
+        const height=500;
+        const width=500;
+        const margin={"top":50,"right":30,"bottom":50,"left":30};
+        const xMax=d3.max(tagExpenses.map(transaction=>transaction[1]))
+        const graph=d3.select("#tag-graph").append("svg").attr("width", width).attr("height", height).style('margin',10);
+        const x=d3.scaleBand().domain(tags).range([margin.left,width-margin.right]).padding(0.3);
+        const y=d3.scaleLinear().domain([0,xMax]).range([height-margin.bottom,margin.top]);
+        console.log(tagExpenses[0][0]+" "+x(tagExpenses[0][0])+", "+tagExpenses[0][1]+" "+y(tagExpenses[0][1])+ " " +xMax);
 
+        graph.append('text').text('Expenses per Tag').attr('x',width/2).attr('y',15).attr("fill", "currentColor").style('font-size',20);
+
+        //bars
+        graph.selectAll('rect').data(tagExpenses).enter().append('rect').attr('x',(d,i)=>x(d[0])).attr('y',(d,i)=>y(d[1])).attr('width',x.bandwidth()).attr('height', (d,i)=>y(0)-y(d[1])).attr('fill','green');
+
+        //x axis
+        graph.append("g").attr("transform","translate(0,"+(height-margin.bottom)+")").call(d3.axisBottom(x))
+            .call(g => g.append("text")
+                .attr("x", width/2)
+                .attr("y", 40)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .style('font-size',15)
+                .text("Tag"));
+
+        //y axis
+        graph.append("g").attr("transform","translate("+margin.left+",0)").call(d3.axisLeft(y))
+            .call(g => g.append("text")
+                .attr("x", -margin.left)
+                .attr("y", 35)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .style('font-size',15)
+                .text("$ Spent"));
+
+    </script>
 </body>
-
+</html>
 
 

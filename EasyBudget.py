@@ -86,7 +86,7 @@ def accountIncomeExpenseQuery(dateInterval:str):
             .group_by(Account.accountname)
     
 
-def topTenExpenseQuery(dateInterval:str):
+def topExpenseQuery(dateInterval:str):
     user=db.session.get(User, session['userid'])
 
     
@@ -114,6 +114,19 @@ def accountTotalQuery(dateInterval:str):
             join(User).\
             where(User.userid == user.userid).\
             where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}')))
+
+def expensePerTagQuery(dateInterval:str):
+    user=db.session.get(User, session['userid'])
+    
+    return select(Transactions.tags, 
+                func.sum(Transactions.amount))\
+            .join(Account)\
+            .join(User)\
+            .where(User.userid == user.userid)\
+            .where(Transactions.tdate>func.date_sub(func.now(), text(f'interval 1 {dateInterval}')))\
+            .where(Transactions.amount<0)\
+            .group_by(Transactions.tags)\
+            .order_by(func.sum(Transactions.amount))
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -158,7 +171,7 @@ def login():
             session['userid'] = user.userid
             uid = session['userid']
 
-            return redirect(url_for('building'))
+            return redirect(url_for('summary'))
         
         # Invalid credentials, redirect back to the login page
         else:
@@ -187,10 +200,11 @@ def summary():
     #GROUP BY amount
     queryInterval='month'
     accountIncomeExpense=db.session.execute(accountIncomeExpenseQuery(queryInterval)).all()
-    topTenExpenses=db.session.execute(topTenExpenseQuery(queryInterval)).all()[:10]#is paginate better?
+    topTenExpenses=db.session.execute(topExpenseQuery(queryInterval)).all()[:10]#is paginate better?
+    tagExpenses=db.session.execute(expensePerTagQuery(queryInterval)).all()[:20]
     numAccounts=len(accountIncomeExpense)
     total=db.session.execute(accountTotalQuery(queryInterval)).first() or {"income":0,"expenses":0,"total":0}
-    return render_template('summary.html', topTenExpenses=topTenExpenses, accountIncomeExpense=accountIncomeExpense, numAccounts=numAccounts, total=total)
+    return render_template('summary.html', topTenExpenses=topTenExpenses, accountIncomeExpense=accountIncomeExpense, numAccounts=numAccounts, tagExpenses=tagExpenses, total=total)
 
 # Run the application on port 5020
 if __name__ == '__main__':
