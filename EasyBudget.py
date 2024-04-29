@@ -17,7 +17,14 @@ app = Flask(__name__)
 # mysql_password = 'Akinkunmie_94'
 # mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie-94@127.0.0.1/izibdgt' # ensure to use: mysql-username:password:serverip/databasename
+
+#Tim
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget'
+#Cody
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget'
+
+#Babatunde
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie-94@127.0.0.1/izibdgt' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
