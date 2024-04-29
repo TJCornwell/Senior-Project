@@ -18,7 +18,7 @@ html {
 
 @font-face {
     font-family: "KarlaRegular";
-    src: url("../static/karla/Karla-Regular");
+    src: url("/static/fonts/karla/Karla-Regular.ttf");
 }
 
 .wrapper {
@@ -35,13 +35,13 @@ html {
 
 @media (max-width: 768px) {
     .wrapper {
-        padding: 5%;
+        padding: 2%;
     }
 }
 
 @media (min-width: 1200px) {
     .wrapper {
-        padding: 8%;
+        padding: 5%;
     }
 }
 
@@ -124,4 +124,8 @@ html {
 
 textarea:focus, .register-form__input:focus {
     outline: none;
+}
+.required {
+    color: red; 
+    margin-left: 3px; 
 }

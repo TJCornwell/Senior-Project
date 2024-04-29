@@ -15,7 +15,7 @@
         <div class="Top-Section">
             <!------Need to add proper links to the pages------>
             <div class="Left-side">
-                <a href="/home">
+                <a href="{{url_for('transact')}}">
                     Home
                 </a>
                 <a href="/about">
@@ -58,25 +58,36 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td class="row-header">Name</td>
+                                    <td class="row-header">First Name</td>
                                     <td>:</td>
-                                    <td class="row-data">{{user.name}}</td>
+                                    <td class="row-data">{{user.fname}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="row-header">Email</td>
+                                    <td class="row-header">Last Name</td>
                                     <td>:</td>
-                                    <td class="row-data">{{user.email}}</td>
+                                    <td class="row-data">{{user.lname}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="row-header">Birthday</td>
+                                    <td class="row-header">D.O.B</td>
                                     <td>:</td>
+                                  <!-- before
                                     <td class="row-data">{{user.birthdate.date() if user.birthdate else user.birthdate}}</td>
+                                  -->
+                                  <!-- after -->
+                                    <td class="row-data">{{fdob}}</td>
+                                  
                                 </tr>
                                 <tr>
                                     <td class="row-header">Gender</td>
                                     <td>:</td>
                                     <td class="row-data">{{user.gender}}</td>
                                 </tr>
+                                <tr>
+                                    <td class="row-header">Email</td>
+                                    <td>:</td>
+                                    <td class="row-data">{{user.email}}</td>
+                                </tr>
+                            
                             </tbody>
                         </table>
                     </div>

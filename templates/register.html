@@ -25,7 +25,47 @@
                     {% endwith %}
                     <form class="register-form" action="#" method="post">
                         <div class="register-form__username">
-                            <label class="register-form__label" for="email">Email</label>
+                            <label class="register-form__label" for="fname">First Name<span class="required" >*</span></label>
+                            <input
+                                title=""
+                                placeholder=""
+                                class="register-form__input"
+                                type="fname"
+                                name="fname"
+                                required/>
+                        </div>
+                        <div class="register-form__username">
+                            <label class="register-form__label" for="lname">Last Name<span class="required" >*</span></label>
+                            <input
+                                title=""
+                                placeholder=""
+                                class="register-form__input"
+                                type="lname"
+                                name="lname"
+                                required/>
+                        </div>
+                        <div class="register-form__username">
+                            <label class="register-form__label" for="birthday">Date of Birth<span class="required" >*</span></label>
+                            <input
+                                title=""
+                                placeholder=""
+                                class="register-form__input"
+                                type="date"
+                                name="dob"
+                                required/>
+                        </div>
+                        <div class="register-form__username">
+                            <label class="register-form__label" for="gender">Gender<span class="required" >*</span></label>
+                            <select name="gender" class="register-form__input" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                    
+                        </div>
+                        <div class="register-form__username">
+                            <label class="register-form__label" for="email">Email<span class="required" >*</span></label>
                             <input
                                 title=""
                                 placeholder=""
@@ -35,7 +75,7 @@
                                 required/>
                         </div>
                         <div class="register-form__password">
-                            <label class="register-form__label" for="password">Password</label>
+                            <label class="register-form__label" for="password">Password<span class="required" >*</span></label>
                             <input
                                 title=""
                                 placeholder=""
@@ -46,7 +86,7 @@
                                 required/>
                         </div>
                         <div class="register-form__confirm-password">
-                            <label class="register-form__label" for="confirm-password">Confirm Password</label>
+                            <label class="register-form__label" for="confirm-password">Confirm Password<span class="required" >*</span></label>
                             <input
                                 title=""
                                 placeholder=""
@@ -63,7 +103,7 @@
                                 viewBox="0 0 24 24">
                                 <path d="M4,10V14H13L9.5,17.5L11.92,19.92L19.84,12L11.92,4.08L9.5,6.5L13,10H4Z" /></svg>
                         </button>
-                        <p><a href="#">Login</a></p>
+                        <p><a href="{{ url_for('login') }}">Login</a></p>
                     </form>
                 </div>
                

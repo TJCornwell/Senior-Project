@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/editTransaction.css">
+    <title>Edit Transactions</title>
+</head>
+<body>
+    <script src="../static/css/editTransaction.css"></script>
+    <main>
+        <section class="wrapper">
+           
+            <form class="edit-form" action="{{ url_for('editTransaction', transaction_id=transaction.id) }}" method="POST">
+                <h1 class="edit-form__header-1">Edit Transaction</h1>
+                Transaction #: {{transaction}} 
+                <div>
+                    <label class="edit-form__label" for="tags">Tags</label> 
+                    <input class="edit-form__input" id="tags" name="tags" type="text" value="{{ transaction.tags }}"required>
+                </div>
+
+                <div>
+                    <label class="edit-form__label" for="tdate">Transaction date</label> 
+                    <input class="edit-form__input" id="transactionDate" name="transactionDate" type="date" value="{{ transaction.tdate }}" required>
+                </div>
+                <div>
+                    <select name="accounts" id="accounts">
+                        {% for account_name in account_names %}
+                            <option value="{{ account_name }}" {% if edit_account.accountname == account_name %}selected{% endif %}>{{ account_name }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    
+                    <!-- Account Selection 
+                    <label class="edit-form__label" for="accounts">Account:</label>
+                    <select name="accounts" id="accounts">
+                        {% for accounts in account_names %}
+                        <option value="{{accounts}}" name="accounts" >{{accounts}}</option>
+                        {% endfor %}
+                    </select>    -->
+                </div>
+                
+                <div>
+                    <label class="edit-form__label" for="merchant">Merchant</label> 
+                    <input class="edit-form__input" id="merchant" name="merchant" type="text" value="{{ transaction.merchant }}" required>
+                </div>
+                <div>
+                       <!-- Transaction Amount -->
+                    <label  class="edit-form__label" for="amount">Amount:</label>
+                    <input class="edit-form__input" type="number" id="amount" name="amount" step="0.01" min="1" value="{{ transaction.amount }}" required>
+                </div>
+                <div class="edit-form__button-menu">
+                    <button class="edit-form__secondary-button" type="submit" name="action" value="delete">Remove</button>
+                    <button class="edit-form__primary-button" type="submit">Confirm</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
