@@ -138,7 +138,6 @@ def login():
     return render_template('login.html')
 
 
-# Route for the building page
 @app.route('/transact', methods=['GET', 'POST'])
 def transact():
     if 'email' in session and 'userid' in session:
