@@ -30,6 +30,7 @@ body {
 */
 .Top-Section
 {
+  font-family: Karla;
   position: relative;
   display: flex;
   background-color: #333;
