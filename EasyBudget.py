@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 #Tim
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 
 #Cody
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
