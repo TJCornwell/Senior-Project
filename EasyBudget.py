@@ -374,14 +374,16 @@ def editProfile():
         uid = session['userid']
         user = User.query.filter_by(userid=uid).first()
         if request.method=='POST':
-            name=request.form['name']
+            fname=request.form['fname']
+            lname=request.form['lname']
             email=request.form['email']
-            birthdate=request.form['birthday']
+            dob=request.form['birthday']
             gender=request.form['gender']
             try:
-                user.name=name if name else user.name
+                user.fname=fname if fname else user.fname
+                user.lname=lname if lname else user.lname
                 user.email=email if email else user.email
-                user.birthdate=birthdate if birthdate else user.birthdate
+                user.dob=dob if dob else user.dob
                 user.gender=gender if gender else user.gender
                 db.session.commit()
                 flash('Profile edited successfully!',"success")

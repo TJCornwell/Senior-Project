@@ -20,49 +20,58 @@
                 
                 <div class="edit-main">
                     <form class="edit-form" action="#" method="post">
-                        <div class="edit-form__name">
-                            <label class="edit-form__label" for="name">Name</label>
+                        <div class="edit-form__fname">
+                            <label class="edit-fname" for="fname">First Name</label>
+                            <input
+                                title="name-input"
+                                placeholder={{user.fname}}
+                                class="edit"
+                                type="text"
+                                name="fname"
+                            />
+                        </div><div class="edit-form__lname">
+                            <label class="edit-lname" for="lname">Last Name</label>
                             <input
                                 title=""
-                                placeholder={{user.name}}
-                                class="edit-form__input"
+                                placeholder={{user.lname}}
+                                class="edit"
                                 type="text"
-                                name="name"
+                                name="lname"
                             />
                         </div>
                         <div class="edit-form__email">
-                            <label class="edit-form__label" for="email">Email</label>
+                            <label class="edit-email" for="email">Email</label>
                             <input
-                                title=""
+                                title="email"
                                 placeholder={{user.email}}
-                                class="edit-form__input"
+                                class="edit"
                                 type="email"
                                 name="email"
                             />
                         </div>
                         <div class="edit-form__birthday">
-                            <label class="edit-form__label" for="birthday">Birthday </label>
+                            <label class="edit-birthday" for="birthday">Birthday </label>
                             <input
-                                class="birthday-input"
                                 title=""
                                 placeholder=mmddyyyy
-                                class="edit-form__input"
+                                class="edit"
                                 type="date"
                                 name="birthday"
-                                value={{user.birthdate}}
+                                value={{user.dob}}
                             >
                         </div>
                         <div class="edit-form__gender">
-                            <label class="edit-form__label" for="gender">Gender</label>
-                            <select class="gender-input"
+                            <label class="edit-gender" for="gender">Gender</label>
+                            <select 
+                            class="gender-input"
                             title=""
                             placeholder={{user.gender}}
-                            class="edit-form__input"
                             type="text"
                             name="gender"> 
                                 <option></option>
                                 <option value="Male">Male</option> 
-                                <option value="Female">Female</option> 
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         {% with messages = get_flashed_messages() %}

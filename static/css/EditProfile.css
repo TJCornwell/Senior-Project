@@ -19,7 +19,7 @@ body{
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 35rem;
   /* height: 22rem; */
   position: relative;
   z-index: 2;
@@ -43,16 +43,35 @@ body{
 .profile-page .content .edit-main label
 {
   padding-bottom: 20px;
-  padding-right: 35px
 }
-.profile-page .content .edit-main .birthday-input
+.profile-page .content .edit-main .edit-fname
 {
-  transform: translateX(-15%);
+  padding-right: 10px;
 }
-.profile-page .content .edit-main .gender-input
+.profile-page .content .edit-main .edit-lname
 {
-  transform: translateX(-7.5%);
+  padding-right: 13px;
 }
+.profile-page .content .edit-main .edit-email
+{
+  padding-right: 60px;
+}
+.profile-page .content .edit-main .edit-birthday
+{
+  padding-right: 32px;
+}
+.profile-page .content .edit-main .edit-gender
+{
+  padding-right: 46px;
+}
+
+
+
+.profile-page .content .edit-main .edit-form__lname
+{
+  padding-top: 10px;
+}
+
 .profile-page .content .edit-main .edit-form__email
 {
   padding-top: 10px;
@@ -62,6 +81,7 @@ body{
 {
   padding-top: 10px;
 }
+
 
 .flashes{
   font-size: 15px;
