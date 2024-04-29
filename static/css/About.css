@@ -7,11 +7,7 @@ body{
     font-family: Karla;
     height: 100%;
   }
-  
-  
-  /*------top nav bar------
-  includes: Profile icon, opens selector for "View Account", "Log out"
-*/
+
 .Top-Section
 {
   position: relative;

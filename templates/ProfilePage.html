@@ -38,7 +38,16 @@
 
             <!------Profile section------>
         <div class="profile-page">
-            <div class="content">            
+            <div class="content">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                            {% for message in messages %}
+                                <li>{{ message | safe }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}            
                 <div class="content__title">
                     <h1>Profile</h1>
                     
@@ -61,7 +70,12 @@
                                 <tr>
                                     <td class="row-header">D.O.B</td>
                                     <td>:</td>
+                                  <!-- before
+                                    <td class="row-data">{{user.birthdate.date() if user.birthdate else user.birthdate}}</td>
+                                  -->
+                                  <!-- after -->
                                     <td class="row-data">{{fdob}}</td>
+                                  
                                 </tr>
                                 <tr>
                                     <td class="row-header">Gender</td>
@@ -80,7 +94,7 @@
                       
                 </div>
                 <div>                
-                    <i class="fa fa-pen fa-xs edit"></i>
+                    <a href="/edit-profile"><i class="fa fa-pen fa-xs edit" ></i></a>
                 </div>
                 
             

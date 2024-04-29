@@ -4,7 +4,7 @@ import flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
-from sqlalchemy import func, exc, true
+from sqlalchemy import func, exc, true, CheckConstraint
 from datetime import datetime, timedelta
 import locale
 
@@ -19,9 +19,16 @@ app = Flask(__name__)
 # mysqlDB = 'easybudget'
 
 #Tim
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+
+#Cody
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget'
 #Cody
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget'
+
 
 #Babatunde
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie-94@127.0.0.1/izibdgt' # ensure to use: mysql-username:password:serverip/databasename
@@ -104,7 +111,8 @@ def register():
                 return redirect(url_for('login'))
             except exc.IntegrityError as e:
                 db.session.rollback()
-                flash('<p style="color: red;">Email has already been registered. Please user another email address</p>', "error")
+                flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
+
                 return redirect(url_for('register'))
         else:
             pass_no_match = 'Passwords do not match. Please try again.'
@@ -359,6 +367,34 @@ def profile():
 def about():
     return render_template('about.html')
 
+@app.route('/edit-profile', methods=['GET','POST'])
+def editProfile():
+    if 'userid' in session:
+        uid = session['userid']
+        user = User.query.filter_by(userid=uid).first()
+        if request.method=='POST':
+            fname=request.form['fname']
+            lname=request.form['lname']
+            email=request.form['email']
+            dob=request.form['birthday']
+            gender=request.form['gender']
+            try:
+                user.fname=fname if fname else user.fname
+                user.lname=lname if lname else user.lname
+                user.email=email if email else user.email
+                user.dob=dob if dob else user.dob
+                user.gender=gender if gender else user.gender
+                db.session.commit()
+                flash('Profile edited successfully!',"success")
+                return redirect(url_for('profile'))
+            except exc.IntegrityError as e:
+                db.session.rollback()
+                flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
+                return redirect(url_for('editProfile'))
+
+        
+
+    return render_template('EditProfile.html', user=user)
 
 # Run the application on port 5020
 if __name__ == '__main__':

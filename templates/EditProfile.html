@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <title>EditProfile</title>
+        <link rel="stylesheet" href="../static/css/EditProfile.css">
+        <script src="https://kit.fontawesome.com/d4b180fb45.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    </head>
+
+
+
+    <body>
+            <!------Profile section------>
+        <div class="profile-page">
+            <div class="content">            
+                <div class="content-title">
+                    <h1>Edit Profile</h1>
+                </div>
+                
+                <div class="edit-main">
+                    <form class="edit-form" action="#" method="post">
+                        <div class="edit-form__fname">
+                            <label class="edit-fname" for="fname">First Name</label>
+                            <input
+                                title="name-input"
+                                placeholder={{user.fname}}
+                                class="edit"
+                                type="text"
+                                name="fname"
+                            />
+                        </div><div class="edit-form__lname">
+                            <label class="edit-lname" for="lname">Last Name</label>
+                            <input
+                                title=""
+                                placeholder={{user.lname}}
+                                class="edit"
+                                type="text"
+                                name="lname"
+                            />
+                        </div>
+                        <div class="edit-form__email">
+                            <label class="edit-email" for="email">Email</label>
+                            <input
+                                title="email"
+                                placeholder={{user.email}}
+                                class="edit"
+                                type="email"
+                                name="email"
+                            />
+                        </div>
+                        <div class="edit-form__birthday">
+                            <label class="edit-birthday" for="birthday">Birthday </label>
+                            <input
+                                title=""
+                                placeholder=mmddyyyy
+                                class="edit"
+                                type="date"
+                                name="birthday"
+                                value={{user.dob}}
+                            >
+                        </div>
+                        <div class="edit-form__gender">
+                            <label class="edit-gender" for="gender">Gender</label>
+                            <select 
+                            class="gender-input"
+                            title=""
+                            placeholder={{user.gender}}
+                            type="text"
+                            name="gender"> 
+                                <option></option>
+                                <option value="Male">Male</option> 
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class="flashes">
+                                    {% for message in messages %}
+                                        <li>{{ message | safe }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <div class="buttons">
+                            <a  class="cancel" href="/profile">
+                                Cancel
+                            </a>
+                             <button type="submit" class="save" value="Submit" >
+                                Save
+                            </button>
+                         </div>
+                    </form>
+                </div>
+                
+                
+            
+                
+            </div>
+        </div>
+    </body>
+</html>
