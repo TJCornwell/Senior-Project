@@ -163,6 +163,10 @@ def transact():
             if from_date > to_date:
                 flash('Invalid date range. "From" date must be before "To" date.')
                 return redirect(url_for('transact'))
+            
+            if not (from_date or to_date or selected_accounts):
+                # If no filters are selected, simply reload the page with existing data
+                return redirect(url_for('transact'))
 
             # Convert start_date and end_date strings to datetime objects
             if from_date and to_date:
