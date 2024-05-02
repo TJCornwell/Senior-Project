@@ -368,6 +368,7 @@ def profile():
         if user:
             formatted_dob = user.dob.strftime('%m/%d/%Y') if user.dob else None
             return render_template('ProfilePage.html', user=user, fdob=formatted_dob)
+    return redirect(url_for('login'))
 
             
 
