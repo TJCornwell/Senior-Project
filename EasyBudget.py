@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 #Tim
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 
 #Cody
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
@@ -31,7 +31,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:passwo
 
 
 #Babatunde
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie-94@127.0.0.1/izibdgt' # ensure to use: mysql-username:password:serverip/databasename
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie-94@127.0.0.1/izibdgt' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -146,6 +146,7 @@ def login():
     return render_template('login.html')
 
 
+# Route for the HomePage page
 @app.route('/transact', methods=['GET', 'POST'])
 def transact():
     if 'email' in session and 'userid' in session:
@@ -163,8 +164,8 @@ def transact():
                 flash('Invalid date range. "From" date must be before "To" date.')
                 return redirect(url_for('transact'))
 
-                # Convert start_date and end_date strings to datetime objects
-            elif from_date and to_date:
+            # Convert start_date and end_date strings to datetime objects
+            if from_date and to_date:
                 start_date = datetime.strptime(from_date, '%Y-%m-%d')
                 end_date = datetime.strptime(to_date, '%Y-%m-%d')
 
@@ -173,7 +174,7 @@ def transact():
                 end_date = datetime.now()           # Default end date
 
             # Pull transaction data joined with account data from the database
-            query_transaction = db.session.query(
+            query = db.session.query(
                 Transactions.id,
                 Transactions.tags, 
                 Transactions.tdate.label('tdate'), 
@@ -182,14 +183,19 @@ def transact():
                 Transactions.amount
             ).join(Account).filter(
                 Account.userid == uid,
-                Transactions.tdate.between(start_date, end_date),
-                Account.accountname.in_(selected_accounts)  # Filter by selected accounts
+                Transactions.tdate.between(start_date, end_date)
+            )
 
-            ).order_by(Transactions.id).all()
+            # Apply account filter if any accounts are selected
+            if selected_accounts:
+                query = query.filter(Account.accountname.in_(selected_accounts))
+
+            # Execute the query and fetch results
+            query_result = query.order_by(Transactions.id).all()
 
             # Format the queried data
             query_1 = []
-            for transaction in query_transaction:
+            for transaction in query_result:
                 amt = locale.currency(transaction.amount, grouping=True)
                 query_1.append((transaction.id, transaction.tags, transaction.tdate, transaction.accountname, transaction.merchant, amt))
                 
@@ -354,7 +360,7 @@ def editTransaction(transaction_id):
 def profile():
     if 'userid' in session:
         uid = session['userid']
-        user = User.query.first()
+        user = User.query.get(uid)
         if user:
             formatted_dob = user.dob.strftime('%m/%d/%Y') if user.dob else None
             return render_template('ProfilePage.html', user=user, fdob=formatted_dob)
@@ -395,6 +401,86 @@ def editProfile():
         
 
     return render_template('EditProfile.html', user=user)
+
+#Route for summary page
+@app.route('/summary')
+def summary():
+    if 'email' in session and 'userid' in session:
+        uid = session['userid']
+        email = session['email']
+        
+
+        #total transaction, account, amount, and distinct merchant pulled from the database
+        total_tran = db.session.query(func.count(Transactions.id)).join(Account).filter(Account.userid == uid).scalar()
+        total_acct = db.session.query(func.count(Account.accountid)).filter(Account.userid == uid).scalar()
+        total_amt, total_merchant = db.session.query(func.sum(Transactions.amount), 
+                                                     func.count(func.distinct(Transactions.merchant))).join(Account).filter(Account.userid == uid).first() # type: ignore
+        # set locale to the US
+        total_amt_loc = locale.currency(abs(total_amt), grouping=True) if total_amt else locale.currency(0, grouping=True)
+        
+        results_transaction = (
+                    db.session.query(Account.accountname, func.count(Transactions.amount))
+                    .join(Transactions, Account.accountid == Transactions.accountid)
+                    .filter(Account.userid == uid)
+                    .group_by(Account.accountname)
+                    .order_by(func.count(Transactions.amount).desc())
+                    .limit(10)
+                    .all()
+        )
+        
+        results_account = (
+                    db.session.query(Account.accountname, func.sum(Transactions.amount).label('amt'))
+                    .join(Transactions, Account.accountid == Transactions.accountid)
+                    .filter(Account.userid == uid)
+                    .group_by(Account.accountname)
+                    .order_by(func.sum(Transactions.amount).desc())
+                    .limit(10)
+                    .all()
+        )
+        results_merchant = (
+                    db.session.query(Transactions.merchant, 
+                    func.sum(Transactions.amount).label('amt'))
+                    .join(Account, Account.accountid == Transactions.accountid)
+                    .filter(Account.userid == uid)
+                    .group_by(Transactions.merchant)
+                    .order_by(func.sum(Transactions.amount).desc())
+                    .limit(10)
+                    .all()
+        )
+        # Print the top 10 results
+        x_acct, x_tran, x_merchant = [],[],[]
+        y_acct, y_tran, y_merchant = [],[],[]
+
+        for transaction_name, total_amount in results_transaction:
+            x_tran.append(transaction_name)
+            y_tran.append(total_amount)
+
+        for account_name, total_amount in results_account:
+            x_acct.append(account_name)
+            y_acct.append(total_amount)
+
+        
+        for merchant_name, total_amount in results_merchant:
+            x_merchant.append(merchant_name)
+            y_merchant.append(total_amount)
+
+        dataVisual = {
+            'x_tran': x_tran,
+            'y_tran': y_tran,
+            'x_acct': x_acct,
+            'y_acct': y_acct,
+            'x_merchant': x_merchant,
+            'y_merchant': y_merchant
+        }
+
+        
+        return render_template('summary.html', email=email, total_tran=total_tran, total_acct=total_acct, 
+                               total_amt=total_amt_loc, total_merchant=total_merchant,
+                               dataVisual=dataVisual)
+    else:
+        return redirect(url_for('login'))
+
+
 
 # Run the application on port 5020
 if __name__ == '__main__':

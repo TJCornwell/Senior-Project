@@ -3,36 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/addaccount.css">
     <title>New Account</title>
 </head>
-<body>
+    <body>
+        <section class="wrapper">
+            <div class="login-main">
+              
 
-<h2>Add New Account</h2>
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class="flashes">
-            {% for message in messages %}
-                <li>{{ message | safe }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul class="flashes">
+                                {% for message in messages %}
+                                    <li style="color: aliceblue;">{{ message | safe }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
 
-<form action="{{ url_for('addaccount') }}" method="post">
-    <!-- Transaction Tag -->
-    <label for="addaccount">Account Name: </label>
-    <input type="text" id="addaccount" name="addaccount" required><br>
+                    <form class="edit-form" action="{{ url_for('addaccount') }}" method="post">
+                        <h2 class="login-main__header-1">Add New Account</h2>
+                        <!-- Transaction Tag -->
+                        <label for="addaccount">Account Name: </label>
+                        <input class="edit-form__input"  type="text" id="addaccount" name="addaccount" required><br>
 
-    <!-- Submit Button -->
-    <input type="submit" value="Submit">
-    
-    <!-- Reset Button -->
-    <input type="reset" value="Reset">
-    
-</form>
-{% if new_acct_error %}
-        <p style="color: red;">{{ new_acct_error }}</p>
-{% endif %}
+                        <!-- Submit Button -->
+                        <div class="edit-form__button-menu">
+                            <button class="edit-form__secondary-button" type="submit" name="action" value="delete">Reset</button>
+                            <button class="edit-form__primary-button" type="submit">Submit</button>
+                        </div>
+                        
+                    </form>
+                    {% if new_acct_error %}
+                            <p style="color: red;">{{ new_acct_error }}</p>
+                    {% endif %}
+            </div>
+        </section>
 
-</body>
+    </body>
 </html>
