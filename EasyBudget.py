@@ -107,8 +107,7 @@ def register():
                                 email=email, password=hashed_password, registration_date=datetime.utcnow()) # type: ignore
                 db.session.add(new_user)
                 db.session.commit()
-                flash('Registration successful!',"success")
-                return redirect(url_for('login'))
+                return '<script>alert("Regisration successful!"); window.location.href = "/";</script>'
             except exc.IntegrityError as e:
                 db.session.rollback()
                 flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
