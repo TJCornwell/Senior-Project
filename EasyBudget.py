@@ -260,6 +260,7 @@ def addaccount():
             db.session.add(new_account)
             db.session.commit()
             flash (f'<b>{addaccount}</b> Account Successfully Added!!')
+            return render_template('addaccount.html')
         else:
             error = "Account already exists"
             return render_template('addaccount.html', new_acct_error=error)
@@ -411,7 +412,7 @@ def editProfile():
             flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
             return redirect(url_for('editProfile'))
 
-    return render_template('edit-profile.html', user=user)
+    return render_template('EditProfile.html', user=user)
 
 #Route for summary page
 @app.route('/summary')
