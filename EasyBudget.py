@@ -265,7 +265,8 @@ def addaccount():
                 return render_template('addaccount.html', new_acct_error=error)
         
 
-    return render_template('addaccount.html')
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/newTransaction', methods=['GET', 'POST'])
 def newTransaction():
@@ -375,7 +376,12 @@ def profile():
 #Route for about Page
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    if 'email' in session and 'userid' in session:
+        uid = session['userid']
+        if uid:
+            return render_template('about.html')
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/edit-profile', methods=['GET','POST'])
 def editProfile():
