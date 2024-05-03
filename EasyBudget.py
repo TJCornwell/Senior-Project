@@ -248,25 +248,26 @@ def transact():
 
 @app.route('/addaccount', methods=['GET', 'POST'])
 def addaccount():
+    if 'userid' not in session:
+        return redirect(url_for('login'))
+    
     if request.method == 'POST':
         addaccount = request.form['addaccount']
+        uid = session['userid']
+        existing_account = Account.query.filter_by(userid=uid, accountname=addaccount).first()
 
-        if 'userid' in session:
-            uid = session['userid']
-            existing_account = Account.query.filter_by(userid=uid, accountname=addaccount).first()
-
-            if existing_account is None:
-                new_account = Account(userid=uid, accountname=addaccount) # type: ignore
-                db.session.add(new_account)
-                db.session.commit()
-                flash (f'<b>{addaccount}</b> Account Successfully Added!!')
-            else:
-                error = "Account already exists"
-                return render_template('addaccount.html', new_acct_error=error)
+        if existing_account is None:
+            new_account = Account(userid=uid, accountname=addaccount) # type: ignore
+            db.session.add(new_account)
+            db.session.commit()
+            flash (f'<b>{addaccount}</b> Account Successfully Added!!')
+        else:
+            error = "Account already exists"
+            return render_template('addaccount.html', new_acct_error=error)
         
 
     else:
-        return redirect(url_for('login'))
+        return render_template('addaccount.html')
 
 @app.route('/newTransaction', methods=['GET', 'POST'])
 def newTransaction():
