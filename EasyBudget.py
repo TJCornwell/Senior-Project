@@ -1,4 +1,3 @@
-import locale
 from flask import Flask, flash, render_template, request, redirect, url_for, session
 import flask
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,7 +8,7 @@ from datetime import datetime, timedelta
 import locale
 
 # set locale to the US
-locale.setlocale(locale.LC_ALL, '')
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 app = Flask(__name__)
 
@@ -411,7 +410,8 @@ def editProfile():
 
         
 
-    return render_template('EditProfile.html', user=user)
+    else:
+        return redirect(url_for('login'))
 
 #Route for summary page
 @app.route('/summary')
