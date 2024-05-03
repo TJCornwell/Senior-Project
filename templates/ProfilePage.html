@@ -38,16 +38,7 @@
 
             <!------Profile section------>
         <div class="profile-page">
-            <div class="content">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <ul class="flashes">
-                            {% for message in messages %}
-                                <li>{{ message | safe }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                {% endwith %}            
+            <div class="content">          
                 <div class="content__title">
                     <h1>Profile</h1>
                     
