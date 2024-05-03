@@ -79,6 +79,15 @@
             <script src="/static/js/dateValidation.js" defer></script>
             
                 <div class="date-filter">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul class="flashes">
+                                {% for message in messages %}
+                                    <li>{{ message | safe }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %} 
                     <div>
                         <label for="fromDate">From:</label>
                         <input type="date" id="fromDate" name="fromDate">
