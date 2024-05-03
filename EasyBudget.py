@@ -385,33 +385,33 @@ def about():
 
 @app.route('/edit-profile', methods=['GET','POST'])
 def editProfile():
-    if 'userid' in session:
-        uid = session['userid']
-        user = User.query.filter_by(userid=uid).first()
-        if request.method=='POST':
-            fname=request.form['fname']
-            lname=request.form['lname']
-            email=request.form['email']
-            dob=request.form['birthday']
-            gender=request.form['gender']
-            try:
-                user.fname=fname if fname else user.fname
-                user.lname=lname if lname else user.lname
-                user.email=email if email else user.email
-                user.dob=dob if dob else user.dob
-                user.gender=gender if gender else user.gender
-                db.session.commit()
-                flash('Profile edited successfully!',"success")
-                return redirect(url_for('profile'))
-            except exc.IntegrityError as e:
-                db.session.rollback()
-                flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
-                return redirect(url_for('editProfile'))
-
-        
-
-    else:
+    if 'userid' not in session:
         return redirect(url_for('login'))
+
+    uid = session['userid']
+    user = User.query.filter_by(userid=uid).first()
+    if request.method=='POST':
+        fname=request.form['fname']
+        lname=request.form['lname']
+        email=request.form['email']
+        dob=request.form['birthday']
+        gender=request.form['gender']
+        
+        try:
+            user.fname=fname if fname else user.fname
+            user.lname=lname if lname else user.lname
+            user.email=email if email else user.email
+            user.dob=dob if dob else user.dob
+            user.gender=gender if gender else user.gender
+            db.session.commit()
+            flash('Profile edited successfully!',"success")
+            return redirect(url_for('profile'))
+        except exc.IntegrityError as e:
+            db.session.rollback()
+            flash('<p style="color: red;">Email has already been registered. Please use another email address.</p>')
+            return redirect(url_for('editProfile'))
+
+    return render_template('edit-profile.html', user=user)
 
 #Route for summary page
 @app.route('/summary')
