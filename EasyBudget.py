@@ -199,7 +199,7 @@ def transact():
             query_1 = []
             for transaction in query_result:
                 amt = locale.currency(transaction.amount, grouping=True)
-                query_1.append((transaction.id, transaction.tags, transaction.tdate, transaction.accountname, transaction.merchant, amt))
+                query_1.append((transaction.id, transaction.merchant, transaction.tdate, transaction.accountname, transaction.tags, amt))
                 
             # Pull current user account names from the database and filter by user id
             acct_check = db.session.query(Account.accountname).filter(Account.userid == uid).all()
@@ -229,7 +229,7 @@ def transact():
             query_1 = []
             for transaction in query_transaction:
                 amt = locale.currency(transaction.amount, grouping=True)
-                query_1.append((transaction.id, transaction.tags, transaction.tdate, transaction.accountname, transaction.merchant, amt))
+                query_1.append((transaction.id, transaction.merchant, transaction.tdate, transaction.accountname, transaction.tags, amt))
             
             # Pull current user account names from the database and filter by user id
             acct_check = db.session.query(Account.accountname).filter(Account.userid == uid).all()
