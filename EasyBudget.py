@@ -13,24 +13,10 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 app = Flask(__name__)
 
 
-# mysql_password = 'Akinkunmie_94'
-# mysql_username = 'tunde'
 # mysqlDB = 'easybudget'
-
-#Tim
-
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
-
-#Cody
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
-
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tcornwell:password@127.0.0.1/easybudget'
-#Cody
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://cody1936:porygon@127.0.0.1/easybudget'
-
-
-#Babatunde
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://tunde:Akinkunmie-94@127.0.0.1/izibdgt' # ensure to use: mysql-username:password:serverip/databasename
+mysql_username = 'cody1936'
+mysql_password = 'porygon'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{mysql_username}:{mysql_password}@127.0.0.1/easybudget' # ensure to use: mysql-username:password:serverip/databasename
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Ebubechidera'
 
@@ -199,7 +185,7 @@ def transact():
             query_1 = []
             for transaction in query_result:
                 amt = locale.currency(transaction.amount, grouping=True)
-                query_1.append((transaction.id, transaction.merchant, transaction.tdate, transaction.accountname, transaction.tags, amt))
+                query_1.append((transaction.id, transaction.tags, transaction.tdate, transaction.accountname, transaction.merchant, amt))
                 
             # Pull current user account names from the database and filter by user id
             acct_check = db.session.query(Account.accountname).filter(Account.userid == uid).all()
@@ -229,7 +215,7 @@ def transact():
             query_1 = []
             for transaction in query_transaction:
                 amt = locale.currency(transaction.amount, grouping=True)
-                query_1.append((transaction.id, transaction.merchant, transaction.tdate, transaction.accountname, transaction.tags, amt))
+                query_1.append((transaction.id, transaction.tags, transaction.tdate, transaction.accountname, transaction.merchant, amt))
             
             # Pull current user account names from the database and filter by user id
             acct_check = db.session.query(Account.accountname).filter(Account.userid == uid).all()
